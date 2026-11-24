@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Family Recipe Book</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#2f5fa8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Recipes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<style>
+@font-face{font-family:Fraunces;font-weight:600;font-display:swap;src:url(fonts/fraunces-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:Fraunces;font-weight:700;font-display:swap;src:url(fonts/fraunces-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Atkinson Hyperlegible";font-weight:400;font-display:swap;src:url(fonts/atkinson-hyperlegible-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Atkinson Hyperlegible";font-weight:700;font-display:swap;src:url(fonts/atkinson-hyperlegible-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:Caveat;font-weight:600;font-display:swap;src:url(fonts/caveat-latin-600-normal.woff2) format("woff2")}
+</style>
+<style>
+/* VOICE: warm, homey, easy to read at the counter with flour on your hands.
+   IDEA: the family recipe box — index cards behind tabbed dividers; the contents is a divider tab tucked at the edge.
+   PICTURE: an open recipe tin with section dividers poking up, labelled with the book's own sections.
+   COLOUR and TYPE: white card stock, gingham cornflower blue, butter yellow, a tomato accent; Fraunces titles, Atkinson body, Caveat for handwriting.
+   LAYOUT: gingham band, hero with the tin, section chips, then recipe cards: card photos left, typed recipe right; drawer on the left edge. */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#0f1a2c);--card:light-dark(#ffffff,#16233a);--ink:light-dark(#1b2333,#eef2f8);--mute:light-dark(#5b6476,#a9b4c6);
+--blue:light-dark(#2f5fa8,#7fa6e6);--blue2:light-dark(#e8eff9,#1d2d4a);--butter:#f2c94c;--tom:light-dark(#d4452f,#ff8a73);--line:light-dark(#dde3ec,#2a3a58)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:20px;scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Atkinson Hyperlegible",system-ui,sans-serif;overflow-x:clip}
+.ging{height:22px;background:
+ repeating-linear-gradient(90deg,color-mix(in srgb,var(--blue) 55%,transparent) 0 14px,transparent 14px 28px),
+ repeating-linear-gradient(0deg,color-mix(in srgb,var(--blue) 55%,transparent) 0 11px,transparent 11px 22px),var(--bg)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 max(4vw,18px) 0 max(4vw,64px)}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.08;text-wrap:balance;margin:0}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(20px,4vw,56px);align-items:center;padding:clamp(28px,5vw,64px) 0 28px}
+.hero h1{font-size:clamp(40px,6vw,64px);color:var(--blue)}
+.hand{font-family:Caveat,cursive;font-size:30px;color:var(--tom);line-height:1;margin:0 0 10px}
+.hero p{max-width:34em;color:var(--mute);margin:16px 0 0}
+.tin{width:100%;height:auto;display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0 30px;border-bottom:2px dashed var(--line)}
+.chips a{padding:10px 16px;border-radius:999px;background:var(--blue2);color:var(--blue);font-weight:700;text-decoration:none;font-size:15px}
+.chips a:hover{background:var(--butter);color:#1b2333}
+.sec{padding-top:44px}
+.sechd{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:12px;border-bottom:3px solid var(--blue);margin-bottom:8px}
+.sechd h2{font-size:clamp(32px,4vw,44px)}.sechd span{color:var(--mute)}
+.rec{position:relative;padding:40px clamp(22px,4vw,48px);margin:28px 0;background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.rec::before,.rec::after,.rec>.sw1,.rec>.sw2{content:"";position:absolute;width:clamp(52px,8vw,84px);height:clamp(52px,8vw,84px);background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20stroke%3D%22%232f5fa8%22%20stroke-width%3D%221.6%22%3E%3Cpath%20d%3D%22M6%2096%20V28%20Q6%206%2028%206%20H96%22/%3E%3Cpath%20d%3D%22M12%2084%20C12%2050%2022%2030%2036%2024%20C46%2020%2054%2026%2052%2034%20C50%2041%2041%2042%2039%2036%20C37.5%2031.5%2042%2029%2044.5%2031.5%22/%3E%3Cpath%20d%3D%22M84%2012%20C50%2012%2030%2022%2024%2036%20C20%2046%2026%2054%2034%2052%20C41%2050%2042%2041%2036%2039%20C31.5%2037.5%2029%2042%2031.5%2044.5%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23d4452f%22%20opacity%3D%22.9%22%3E%3Cpath%20d%3D%22M16%2016%20C22%2010%2030%2012%2027%2018%20C24%2024%2016%2023%2016%2016%20Z%22/%3E%3Cpath%20d%3D%22M12%2070%20C6%2066%206%2059%2011%2060%20C15%2061%2015%2067%2012%2070%20Z%22/%3E%3Cpath%20d%3D%22M70%2012%20C66%206%2059%206%2060%2011%20C61%2015%2067%2015%2070%2012%20Z%22/%3E%3Ccircle%20cx%3D%2258%22%20cy%3D%2258%22%20r%3D%222.2%22/%3E%3C/g%3E%3C/svg%3E") no-repeat center/contain;opacity:.8;pointer-events:none}
+.rec::before{top:8px;left:8px}
+.rec::after{bottom:8px;right:8px;transform:rotate(180deg)}
+.rec>.sw1{top:8px;right:8px;transform:scaleX(-1)}
+.rec>.sw2{bottom:8px;left:8px;transform:scaleY(-1)}
+:root[data-theme=dark] .rec::before,:root[data-theme=dark] .rec::after,:root[data-theme=dark] .rec>.sw1,:root[data-theme=dark] .rec>.sw2{filter:brightness(1.8)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .rec::before,:root:not([data-theme=light]) .rec::after,:root:not([data-theme=light]) .rec>.sw1,:root:not([data-theme=light]) .rec>.sw2{filter:brightness(1.8)}}
+.rec h3{text-align:center;padding:0 clamp(40px,8vw,70px)}
+.rec h3{font-size:30px;margin-bottom:22px}
+.rg{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(18px,3vw,40px);align-items:start}
+.cards{display:grid;gap:12px}
+.ph{all:unset;cursor:zoom-in;display:block;border-radius:6px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.12),0 8px 22px -10px rgba(20,35,70,.35);background:var(--blue2)}
+.ph img{display:block;width:100%;height:auto}
+.ph:focus-visible{outline:3px solid var(--tom);outline-offset:3px}
+.txt>p:first-child em{color:var(--mute)}
+.txt strong{font-family:Fraunces,Georgia,serif;font-size:19px;color:var(--blue)}
+.txt ul,.txt ol{padding-left:1.3em;margin:6px 0 18px}.txt li{margin:3px 0}
+.txt ol li::marker{color:var(--tom);font-weight:700}
+.txt em{color:var(--mute)}
+.txt table{border-collapse:collapse;width:100%;margin:6px 0 18px;font-size:16px}
+.txt th,.txt td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}.txt th{color:var(--blue)}
+.ghr{display:flex;align-items:center;gap:2px;margin-top:6px}
+.tg{all:unset;cursor:pointer;width:36px;height:40px;display:grid;place-items:center;border-radius:6px;flex:none}
+.tg:hover{background:var(--blue2)}.tg:focus-visible{outline:2px solid var(--tom)}
+.car{width:8px;height:8px;border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg);transition:transform .2s}
+.tg[aria-expanded=true] .car{transform:rotate(45deg)}
+.ghr .gh{flex:1;padding:8px 8px 8px 2px}
+.list ul{padding-left:30px!important}
+.tools{display:flex;gap:8px;margin-top:8px}.tools button{all:unset;cursor:pointer;font-size:13px;color:var(--blue);padding:6px 8px;border-radius:6px}.tools button:hover{background:var(--blue2)}
+/* drawer */
+.toc{position:fixed;left:0;top:0;bottom:0;width:min(330px,88vw);z-index:20;transform:translateX(-100%);transition:transform .28s ease;background:var(--card);border-right:1px solid var(--line);box-shadow:none}
+.toc.open{box-shadow:8px 0 30px -18px rgba(0,0,0,.5)}
+.toc.open{transform:none}
+.tab{all:unset;position:absolute;left:100%;top:22vh;display:flex;flex-direction:column;align-items:center;gap:10px;width:40px;padding:14px 0 16px;background:var(--butter);color:#1b2333;border-radius:0 12px 12px 0;cursor:pointer;box-shadow:2px 3px 10px -4px rgba(0,0,0,.35);transition:width .2s}
+.tab:hover{width:46px}
+.tab:focus-visible{outline:3px solid var(--tom);outline-offset:2px}
+.tab svg{width:18px;height:18px;flex:none;transition:transform .28s}
+.toc.open .tab svg{transform:rotate(180deg)}
+.tab span{writing-mode:vertical-rl;transform:rotate(180deg);font:700 15px/1 "Atkinson Hyperlegible",sans-serif;letter-spacing:.03em}
+.tocin{height:100%;display:flex;flex-direction:column}
+.toch{padding:18px 18px 10px;border-bottom:1px solid var(--line)}
+.toch h2{font-size:24px;color:var(--blue);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.x{all:unset;cursor:pointer;width:40px;height:40px;display:grid;place-items:center;border-radius:8px;font-size:22px;color:var(--mute)}.x:hover{background:var(--blue2)}
+.toch input{width:100%;font:16px "Atkinson Hyperlegible",sans-serif;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.toch input:focus{outline:2px solid var(--blue);border-color:transparent}
+.list{position:relative;overflow-y:auto;padding:8px 10px 30px;flex:1;overscroll-behavior:contain}
+.gh{display:flex;justify-content:space-between;align-items:baseline;font-family:Fraunces,Georgia,serif;font-weight:700;color:var(--ink);text-decoration:none;font-size:18px}
+.gh small{font:13px "Atkinson Hyperlegible";color:var(--mute)}
+.list ul{list-style:none;margin:0;padding:0}
+.list li a{display:block;padding:7px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:15px;line-height:1.3;border-left:3px solid transparent}
+.list li a:hover{background:var(--blue2)}
+.list li a.on{border-left-color:var(--tom);background:var(--blue2);color:var(--blue);font-weight:700}
+.empty{color:var(--mute);padding:14px 10px;display:none}
+.scrim{position:fixed;inset:0;background:rgba(10,20,40,.3);opacity:0;pointer-events:none;transition:opacity .25s;z-index:15}
+.scrim.on{opacity:1;pointer-events:auto}
+dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:94vh}
+dialog::backdrop{background:rgba(8,14,28,.85)}
+dialog img{max-width:96vw;max-height:88vh;display:block;border-radius:6px}
+dialog p{color:#fff;text-align:center;margin:8px 0 0;font-size:14px}
+footer{padding:40px 0 60px;color:var(--mute);font-size:15px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.rg{grid-template-columns:1fr}.cards{position:static;grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}.wrap{padding-left:max(4vw,52px)}.rec h3{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="ging"></div>
+<nav class="toc" id="toc" aria-label="Recipes">
+  <button class="tab" id="tab" aria-expanded="false" aria-controls="toc" aria-label="Recipes menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg><span>Recipes</span></button>
+  <div class="tocin">
+    <div class="toch"><h2>Contents <button class="x" id="close" aria-label="Close contents">×</button></h2>
+      <input id="q" type="search" placeholder="Find a recipe…" aria-label="Find a recipe" autocomplete="off"><div class="tools"><button id="ex">Expand all</button><button id="co">Collapse all</button></div></div>
+    <div class="list" id="list"><div class="grp" data-g="breakfast-breads"><div class="ghr"><button class="tg" aria-expanded="false" aria-controls="l-breakfast-breads" aria-label="Show Breakfast &amp; Breads recipes"><span class="car" aria-hidden="true"></span></button><a class="gh" href="#breakfast-breads">Breakfast &amp; Breads <small>4</small></a></div><ul id="l-breakfast-breads" hidden><li><a href="#banana-nut-bread" data-t="banana nut bread">Banana Nut Bread</a></li><li><a href="#basic-quiche" data-t="basic quiche">Basic Quiche</a></li><li><a href="#bonnies-hot-rolls" data-t="bonnie&#x27;s hot rolls">Bonnie&#x27;s Hot Rolls</a></li><li><a href="#focaccia" data-t="focaccia">Focaccia</a></li></ul></div><div class="grp" data-g="mains"><div class="ghr"><button class="tg" aria-expanded="false" aria-controls="l-mains" aria-label="Show Mains recipes"><span class="car" aria-hidden="true"></span></button><a class="gh" href="#mains">Mains <small>13</small></a></div><ul id="l-mains" hidden><li><a href="#brittens-clam-chowder" data-t="britten&#x27;s clam chowder">Britten&#x27;s Clam Chowder</a></li><li><a href="#chicken-broccoli-casserole" data-t="chicken &amp; broccoli casserole">Chicken &amp; Broccoli Casserole</a></li><li><a href="#chicken-spinach-pie" data-t="chicken spinach pie">Chicken Spinach Pie</a></li><li><a href="#chile-verde" data-t="chile verde">Chile Verde</a></li><li><a href="#clam-chowder-with-red-wine-vinegar" data-t="clam chowder (with red wine vinegar)">Clam Chowder (with red wine vinegar)</a></li><li><a href="#crock-pot-chicken" data-t="crock-pot chicken">Crock-Pot Chicken</a></li><li><a href="#enchilada-casserole" data-t="enchilada casserole">Enchilada Casserole</a></li><li><a href="#forgotten-chicken" data-t="forgotten chicken">Forgotten Chicken</a></li><li><a href="#grandmas-chicken-biscuits" data-t="grandma&#x27;s chicken &amp; biscuits">Grandma&#x27;s Chicken &amp; Biscuits</a></li><li><a href="#lindas-ham-cheese-casserole" data-t="linda&#x27;s ham &amp; cheese casserole">Linda&#x27;s Ham &amp; Cheese Casserole</a></li><li><a href="#sakamaki-chicken" data-t="sakamaki chicken">Sakamaki Chicken</a></li><li><a href="#stuffed-cabbage" data-t="stuffed cabbage">Stuffed Cabbage</a></li><li><a href="#tamale-pie" data-t="tamale pie">Tamale Pie</a></li></ul></div><div class="grp" data-g="salads-sides-appetizers"><div class="ghr"><button class="tg" aria-expanded="false" aria-controls="l-salads-sides-appetizers" aria-label="Show Salads, Sides &amp; Appetizers recipes"><span class="car" aria-hidden="true"></span></button><a class="gh" href="#salads-sides-appetizers">Salads, Sides &amp; Appetizers <small>10</small></a></div><ul id="l-salads-sides-appetizers" hidden><li><a href="#au-gratin-potatoes" data-t="au gratin potatoes">Au Gratin Potatoes</a></li><li><a href="#bowtie-pasta-chicken-salad" data-t="bowtie pasta chicken salad">Bowtie Pasta Chicken Salad</a></li><li><a href="#broccoli-rice-casserole" data-t="broccoli rice casserole">Broccoli Rice Casserole</a></li><li><a href="#cheese-balls" data-t="cheese balls">Cheese Balls</a></li><li><a href="#chicken-salad" data-t="chicken salad">Chicken Salad</a></li><li><a href="#fiesta-appetizer-pie" data-t="fiesta appetizer pie">Fiesta Appetizer Pie</a></li><li><a href="#mandarin-pineapple-chicken-salad" data-t="mandarin-pineapple chicken salad">Mandarin-Pineapple Chicken Salad</a></li><li><a href="#sausage-appetizers" data-t="sausage appetizers">Sausage Appetizers</a></li><li><a href="#spinach-pasta-salad" data-t="spinach pasta salad">Spinach Pasta Salad</a></li><li><a href="#torn-clipping-partly-readable" data-t="torn clipping (partly readable)">Torn Clipping (partly readable)</a></li></ul></div><div class="grp" data-g="desserts-treats"><div class="ghr"><button class="tg" aria-expanded="false" aria-controls="l-desserts-treats" aria-label="Show Desserts &amp; Treats recipes"><span class="car" aria-hidden="true"></span></button><a class="gh" href="#desserts-treats">Desserts &amp; Treats <small>37</small></a></div><ul id="l-desserts-treats" hidden><li><a href="#bonnies-cookies-bars" data-t="bonnie&#x27;s cookies (bars)">Bonnie&#x27;s Cookies (Bars)</a></li><li><a href="#brownies-with-marshmallows" data-t="brownies with marshmallows">Brownies with Marshmallows</a></li><li><a href="#caramel-popcorn" data-t="caramel popcorn">Caramel Popcorn</a></li><li><a href="#caramel-ribbon-brownies" data-t="caramel ribbon brownies">Caramel Ribbon Brownies</a></li><li><a href="#carrot-cake" data-t="carrot cake">Carrot Cake</a></li><li><a href="#cheesecake-lemon-jell-o" data-t="cheesecake (lemon jell-o)">Cheesecake (Lemon Jell-O)</a></li><li><a href="#cheesecake-brownies" data-t="cheesecake brownies">Cheesecake Brownies</a></li><li><a href="#chocolate-crinkles" data-t="chocolate crinkles">Chocolate Crinkles</a></li><li><a href="#chocolate-fudge" data-t="chocolate fudge">Chocolate Fudge</a></li><li><a href="#chocolate-marshmallow-cookies" data-t="chocolate marshmallow cookies">Chocolate Marshmallow Cookies</a></li><li><a href="#coconut-macaroons" data-t="coconut macaroons">Coconut Macaroons</a></li><li><a href="#corn-puffs-caramel" data-t="corn puffs (caramel)">Corn Puffs (Caramel)</a></li><li><a href="#double-decker-fudge" data-t="double decker fudge">Double Decker Fudge</a></li><li><a href="#german-chocolate-cookies" data-t="german chocolate cookies">German Chocolate Cookies</a></li><li><a href="#ginger-snaps" data-t="ginger snaps">Ginger Snaps</a></li><li><a href="#good-fudge" data-t="good fudge">Good Fudge</a></li><li><a href="#hello-dollies" data-t="hello dollies">Hello Dollies</a></li><li><a href="#honey-crunch" data-t="honey crunch">Honey Crunch</a></li><li><a href="#karens-sugar-cookies" data-t="karen&#x27;s sugar cookies">Karen&#x27;s Sugar Cookies</a></li><li><a href="#lemon-cake" data-t="lemon cake">Lemon Cake</a></li><li><a href="#magic-cookie-bars" data-t="magic cookie bars">Magic Cookie Bars</a></li><li><a href="#maple-cake-magazine-clipping" data-t="maple cake (magazine clipping)">Maple Cake (magazine clipping)</a></li><li><a href="#ms-fields-cookies" data-t="ms. field&#x27;s cookies">Ms. Field&#x27;s Cookies</a></li><li><a href="#oatmeal-carmelitas" data-t="oatmeal carmelitas">Oatmeal Carmelitas</a></li><li><a href="#oatmeal-cookies" data-t="oatmeal cookies">Oatmeal Cookies</a></li><li><a href="#old-fashioned-peach-cobbler" data-t="old-fashioned peach cobbler">Old-Fashioned Peach Cobbler</a></li><li><a href="#peanut-butter-bars" data-t="peanut butter bars">Peanut Butter Bars</a></li><li><a href="#pickett-bars" data-t="pickett bars">Pickett Bars</a></li><li><a href="#poor-mans-cake" data-t="poor man&#x27;s cake">Poor Man&#x27;s Cake</a></li><li><a href="#powdered-sugar-cookies" data-t="powdered sugar cookies">Powdered Sugar Cookies</a></li><li><a href="#raisin-cookies" data-t="raisin cookies">Raisin Cookies</a></li><li><a href="#rosettes" data-t="rosettes">Rosettes</a></li><li><a href="#snickerdoodles" data-t="snickerdoodles">Snickerdoodles</a></li><li><a href="#soft-cookie-pops" data-t="soft cookie pops">Soft Cookie Pops</a></li><li><a href="#sour-cream-cookies-marilyn-borden" data-t="sour cream cookies (marilyn borden)">Sour Cream Cookies (Marilyn Borden)</a></li><li><a href="#sour-cream-cookies-with-half-recipe" data-t="sour cream cookies (with half recipe)">Sour Cream Cookies (with half recipe)</a></li><li><a href="#supreme-lemon-squares" data-t="supreme lemon squares">Supreme Lemon Squares</a></li></ul></div><div class="grp" data-g="holiday"><div class="ghr"><button class="tg" aria-expanded="false" aria-controls="l-holiday" aria-label="Show Holiday recipes"><span class="car" aria-hidden="true"></span></button><a class="gh" href="#holiday">Holiday <small>2</small></a></div><ul id="l-holiday" hidden><li><a href="#gingerbread-men-christmas" data-t="gingerbread men (christmas)">Gingerbread Men (Christmas)</a></li><li><a href="#spritz-cookies-christmas" data-t="spritz cookies (christmas)">Spritz Cookies (Christmas)</a></li></ul></div><p class="empty" id="empty">No recipe by that name.</p></div>
+  </div>
+</nav>
+<div class="scrim" id="scrim"></div>
+<div class="wrap">
+<header class="hero">
+  <div>
+    <p class="hand">from the family recipe box</p>
+    <h1>Family Recipe Book</h1>
+    <p>65 recipes typed up from the old cards, notes and clippings, each with a photo of the original. Pull out the yellow <strong>Recipes</strong> tab on the left edge any time to jump around the book.</p>
+  </div>
+  <svg class="tin" viewBox="0 0 520 330" role="img" aria-label="An open recipe box with tabbed dividers">
+    <defs><linearGradient id="tb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a6cb8"/><stop offset="1" stop-color="#244c8c"/></linearGradient>
+    <pattern id="gg" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#fff"/><rect width="8" height="16" fill="#2f5fa8" opacity=".45"/><rect width="16" height="8" fill="#2f5fa8" opacity=".45"/></pattern></defs>
+    <ellipse cx="260" cy="314" rx="230" ry="12" fill="#000" opacity=".12"/>
+    <rect x="70" y="40" width="380" height="60" rx="6" fill="#244c8c"/>
+    <g font-family="Atkinson Hyperlegible,sans-serif" font-size="15" font-weight="700" fill="#1b2333">
+      <g transform="translate(92 52)"><rect width="336" height="150" rx="5" fill="#fff" stroke="#cfd7e4"/><rect x="8" y="-20" width="92" height="30" rx="6" fill="#f2c94c"/><text x="20" y="0">Breakfast</text></g>
+      <g transform="translate(92 76)"><rect width="336" height="150" rx="5" fill="#fff" stroke="#cfd7e4"/><rect x="88" y="-20" width="68" height="30" rx="6" fill="#ffd9d2"/><text x="102" y="0">Mains</text></g>
+      <g transform="translate(92 100)"><rect width="336" height="150" rx="5" fill="#fff" stroke="#cfd7e4"/><rect x="150" y="-20" width="62" height="30" rx="6" fill="#d9e6f7"/><text x="166" y="0">Sides</text></g>
+      <g transform="translate(92 124)"><rect width="336" height="150" rx="5" fill="#fff" stroke="#cfd7e4"/><rect x="204" y="-20" width="84" height="30" rx="6" fill="#d4452f"/><text x="216" y="0" fill="#fff">Desserts</text>
+        <g stroke="#9fb3d1" stroke-width="1.2"><line x1="20" y1="46" x2="316" y2="46"/><line x1="20" y1="66" x2="316" y2="66"/></g>
+        <text x="24" y="40" font-family="Caveat,cursive" font-size="24" font-weight="600" fill="#2f5fa8">Carrot Cake</text></g>
+      <g transform="translate(92 148)"><rect width="336" height="150" rx="5" fill="#fff" stroke="#cfd7e4"/><rect x="262" y="-20" width="72" height="30" rx="6" fill="#bfe3c4"/><text x="272" y="0">Holiday</text></g>
+    </g>
+    <path d="M52 168h416l-18 140a10 10 0 0 1-10 9H80a10 10 0 0 1-10-9z" fill="url(#tb)"/>
+    <rect x="52" y="168" width="416" height="38" fill="url(#gg)" opacity=".9"/>
+    <rect x="200" y="224" width="120" height="44" rx="6" fill="#fff"/>
+    <text x="260" y="254" text-anchor="middle" font-family="Caveat,cursive" font-size="26" font-weight="600" fill="#d4452f">Recipes</text>
+    <path d="M52 168h416" stroke="#fff" stroke-opacity=".6" stroke-width="2"/>
+  </svg>
+</header>
+<nav class="chips" aria-label="Sections"><a href="#breakfast-breads">Breakfast &amp; Breads</a><a href="#mains">Mains</a><a href="#salads-sides-appetizers">Salads, Sides &amp; Appetizers</a><a href="#desserts-treats">Desserts &amp; Treats</a><a href="#holiday">Holiday</a></nav>
+<main><section class="sec" id="breakfast-breads"><div class="sechd"><h2>Breakfast &amp; Breads</h2><span>4 recipes</span></div><article class="rec" id="banana-nut-bread"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Banana Nut Bread</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c00.jpg" aria-label="Enlarge: Original Banana Nut Bread card"><img src="img/c00.jpg" alt="Original Banana Nut Bread card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>8 large bananas</li>
+<li>4 eggs</li>
+<li>1 c. butter</li>
+<li>2 c. sugar</li>
+<li>4 c. flour</li>
+<li>2 tsp. soda</li>
+<li>1 tsp. salt</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Beat the bananas and eggs together.</li>
+<li>Beat the butter and sugar, then add the banana and egg mixture.</li>
+<li>Mix in the flour, soda and salt.</li>
+<li>Bake at 325° for 50 minutes.</li>
+</ol>
+<p><em>The card lists no nuts and no pan size. The salt line is partly hidden behind the card's fold.</em></p></div></div></article><article class="rec" id="bonnies-hot-rolls"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Bonnie&#x27;s Hot Rolls</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c01.jpg" aria-label="Enlarge: Original Bonnie&#x27;s Hot Rolls card"><img src="img/c01.jpg" alt="Original Bonnie&#x27;s Hot Rolls card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>3 c. milk, scalded</li>
+<li>1 cube (stick) margarine, plus more melted for the tops</li>
+<li>5 tbs. sugar</li>
+<li>1 tbs. salt</li>
+<li>8 c. flour</li>
+<li>1 c. water</li>
+<li>2 packages yeast (a note says 3)</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Mix the dough, knead and let rise.</li>
+<li>Roll ½ to ¼ inch thick and cut in squares.</li>
+<li>Put 3 or 4 squares in each cup of a greased muffin tin. Brush melted margarine on each.</li>
+<li>Let rise at least ½ hour.</li>
+<li>Bake at 400° for 10–12 minutes.</li>
+</ol></div></div></article><article class="rec" id="basic-quiche"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Basic Quiche</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c02.jpg" aria-label="Enlarge: Original Basic Quiche note, front"><img src="img/c02.jpg" alt="Original Basic Quiche note, front" loading="lazy"></button><button class="ph" data-full="img/c03.jpg" aria-label="Enlarge: Original Basic Quiche note, back"><img src="img/c03.jpg" alt="Original Basic Quiche note, back" loading="lazy"></button></div><div class="txt"><p><em>Serves 8 as an appetizer or 6 for lunch.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>1 (9-inch) pie crust, rubbed with butter and placed in the freezer</li>
+<li>12 slices bacon (the cook notes "I use 7")</li>
+<li>4 eggs</li>
+<li>¼ c. chopped green onions</li>
+<li>2 c. whipping cream</li>
+<li>¼ lb. Swiss cheese, grated (1½ cups)</li>
+<li>¾ tsp. salt</li>
+<li>1 T. flour</li>
+<li>⅛ tsp. pepper</li>
+<li>⅛ tsp. nutmeg</li>
+<li>⅛ tsp. sugar</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Preheat the oven to 425°.</li>
+<li>Fry the bacon until crisp and chop into ½-inch pieces.</li>
+<li>Beat the eggs, cream, salt, pepper, nutmeg, sugar and flour until blended.</li>
+<li>Mix the onions, cheese and bacon together and place in the bottom of the frozen shell. Pour the cream mixture over the top.</li>
+<li>Bake 15 minutes at 425°, then lower the heat to 300° for 45 minutes.</li>
+</ol></div></div></article><article class="rec" id="focaccia"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Focaccia</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c04.jpg" aria-label="Enlarge: Original Focaccia card, front"><img src="img/c04.jpg" alt="Original Focaccia card, front" loading="lazy"></button><button class="ph" data-full="img/c05.jpg" aria-label="Enlarge: Original Focaccia card, back"><img src="img/c05.jpg" alt="Original Focaccia card, back" loading="lazy"></button></div><div class="txt"><p><em>From Gigliola Nordman</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>3¾ c. flour</li>
+<li>1 small potato, boiled with salt, peeled and mashed</li>
+<li>2 cubes (cakes) of yeast</li>
+<li>1 c. lukewarm water</li>
+<li>Olive oil</li>
+<li>Salt</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Combine the flour, potato, yeast and water.</li>
+<li>Knead 3–5 minutes. Cover and let rise 1½–2 hours.</li>
+<li>Oil a pan and spread the dough in it. Poke holes in the dough with your finger.</li>
+<li>Sprinkle with salt and olive oil. Bake 30 minutes at 375°.</li>
+</ol></div></div></article></section><section class="sec" id="mains"><div class="sechd"><h2>Mains</h2><span>13 recipes</span></div><article class="rec" id="sakamaki-chicken"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Sakamaki Chicken</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c06.jpg" aria-label="Enlarge: Original Sakamaki Chicken card"><img src="img/c06.jpg" alt="Original Sakamaki Chicken card" loading="lazy"></button></div><div class="txt"><p><em>From the kitchen of Karen</em></p>
+<p><strong>Sauce</strong></p>
+<ul>
+<li>1 small can tomato sauce</li>
+<li>¾ c. brown sugar</li>
+<li>½ c. soy sauce</li>
+<li>½ c. water</li>
+<li>1 squirt mustard</li>
+<li>2 TBS. vinegar</li>
+</ul>
+<p><strong>You'll also need</strong></p>
+<ul>
+<li>12 chicken thighs</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Bring the sauce ingredients to a boil.</li>
+<li>Put the 12 chicken thighs in the sauce.</li>
+<li>Put the lid on and cook 1 to 1½ hours. Turn the heat to low or simmer.</li>
+</ol></div></div></article><article class="rec" id="brittens-clam-chowder"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Britten&#x27;s Clam Chowder</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c07.jpg" aria-label="Enlarge: Original Clam Chowder recipe"><img src="img/c07.jpg" alt="Original Clam Chowder recipe" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>6 c. diced potatoes (changed from 8)</li>
+<li>2 c. celery</li>
+<li>2 c. onion</li>
+<li>1 cube (stick) butter</li>
+<li>¾ c. flour</li>
+<li>1 pt. half and half</li>
+<li>5 c. milk</li>
+<li>1½ tsp. salt</li>
+<li>2 cans minced clams, with juice</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Boil the potatoes, celery and onion until tender.</li>
+<li>Melt the butter and add the flour. Add the half and half and milk, and cook until thick. Add the salt.</li>
+<li>Add the vegetables and the clams with their juice. Heat through.</li>
+</ol></div></div></article><article class="rec" id="crock-pot-chicken"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Crock-Pot Chicken</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c08.jpg" aria-label="Enlarge: Original Crock-Pot Chicken note"><img src="img/c08.jpg" alt="Original Crock-Pot Chicken note" loading="lazy"></button></div><div class="txt"><p><em>The note has no clear title, so I named it.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>6 chicken breasts</li>
+<li>8 oz. carrots</li>
+<li>Onions</li>
+<li>1 can cream of mushroom soup</li>
+<li>1 pkg. dry Italian dressing mix</li>
+<li>½ c. sour cream</li>
+<li>Cornstarch, to thicken</li>
+<li>Rice and broccoli, for serving</li>
+</ul>
+<p><strong>Directions</strong></p>
+<p><em>The note is in faint pencil and mostly lists ingredients. My best reading: cook everything except the sour cream and cornstarch in the crock-pot for 3–4 hours. Stir in the sour cream, thicken with cornstarch, and serve over rice with broccoli.</em></p></div></div></article><article class="rec" id="chile-verde"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Chile Verde</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c09.jpg" aria-label="Enlarge: Original Chile Verde clipping"><img src="img/c09.jpg" alt="Original Chile Verde clipping" loading="lazy"></button></div><div class="txt"><p><em>From Claudia Mackin (newspaper clipping)</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>1 pound pork, cubed (or beef)</li>
+<li>1 large onion, diced</li>
+<li>1 clove garlic, minced (or garlic salt)</li>
+<li>1 teaspoon cumin</li>
+<li>2 tablespoons flour</li>
+<li>1 tomato, diced</li>
+<li>8 to 10 green chilies</li>
+<li>2 to 3 jalapeño chilies (optional)</li>
+<li>2 cups water</li>
+<li>Flour tortillas, for serving</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>In a skillet, fry the pork, onion, garlic and cumin. Simmer 30 minutes.</li>
+<li>Add the flour and stir.</li>
+<li>Add the tomato, chilies and water. Stir and simmer 3 hours, uncovered.</li>
+<li>Serve on or with flour tortillas.</li>
+</ol></div></div></article><article class="rec" id="grandmas-chicken-biscuits"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Grandma&#x27;s Chicken &amp; Biscuits</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c10.jpg" aria-label="Enlarge: Original Chicken &amp; Biscuits recipe"><img src="img/c10.jpg" alt="Original Chicken &amp; Biscuits recipe" loading="lazy"></button></div><div class="txt"><p><em>From Teri Bogden</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>½ onion</li>
+<li>Butter</li>
+<li>4 c. cooked chicken</li>
+<li>1 c. sour cream</li>
+<li>1 can cream of chicken soup</li>
+<li>1 jar pimentos</li>
+<li>6 frozen biscuits, thawed</li>
+<li>1 c. cheddar cheese</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Sauté the onion in butter until tender. Add the chicken and cook until no longer pink.</li>
+<li>Mix the sour cream, soup and pimentos together and add the chicken.</li>
+<li>Spray an 11×7 baking dish with Pam and pour in the mixture.</li>
+<li>Bake at 350° for 15 minutes. Sprinkle with half the cheese.</li>
+</ol>
+<p><em>The page ends here. It probably continues with the biscuits on top, the rest of the cheese, and more baking time. Check whether there's a second page.</em></p></div></div></article><article class="rec" id="forgotten-chicken"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Forgotten Chicken</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c11.jpg" aria-label="Enlarge: Original Forgotten Chicken recipe"><img src="img/c11.jpg" alt="Original Forgotten Chicken recipe" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1¾ c. dry rice</li>
+<li>1 can cream of mushroom soup</li>
+<li>1 pkg. dry onion soup mix</li>
+<li>3 c. water</li>
+<li>About 3½ lbs. chicken pieces</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Grease a baking dish.</li>
+<li>Layer the ingredients in the dish in the order given, with the chicken on top.</li>
+<li>Cover and bake at 350° for 2½ hours.</li>
+</ol></div></div></article><article class="rec" id="chicken-broccoli-casserole"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Chicken &amp; Broccoli Casserole</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c12.jpg" aria-label="Enlarge: Original Chicken &amp; Broccoli Casserole card"><img src="img/c12.jpg" alt="Original Chicken &amp; Broccoli Casserole card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1 fryer chicken</li>
+<li>2 pkgs. broccoli</li>
+<li>1 can cream of chicken soup</li>
+<li>1 can cream of mushroom soup</li>
+<li>¾ c. mayonnaise or Miracle Whip</li>
+<li>2 tsp. lemon juice</li>
+<li>½–¾ c. grated cheese</li>
+<li>2 c. buttered bread crumbs</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Boil the chicken in salted water, then bone it.</li>
+<li>Cook the broccoli in salted water.</li>
+<li>Combine the chicken and broccoli with the soups, mayonnaise and lemon juice. Top with the cheese and bread crumbs.</li>
+<li>Bake at 350° for 30 minutes.</li>
+</ol></div></div></article><article class="rec" id="chicken-spinach-pie"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Chicken Spinach Pie</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c13.jpg" aria-label="Enlarge: Original Chicken Spinach Pie card"><img src="img/c13.jpg" alt="Original Chicken Spinach Pie card" loading="lazy"></button></div><div class="txt"><p><em>The card has no title, so I named it.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>1 (9-inch) pie shell</li>
+<li>1 (10¾ oz.) can chunky chicken soup</li>
+<li>3 eggs, slightly beaten</li>
+<li>1 c. cottage cheese</li>
+<li>½ c. grated cheese</li>
+<li>½ c. cooked chopped spinach, drained</li>
+<li>¼ c. finely chopped onion</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Bake the pie shell until lightly browned, about 10 minutes.</li>
+<li>Mix the remaining ingredients and pour into the shell.</li>
+<li>Bake at 350° for 1 hour.</li>
+</ol></div></div></article><article class="rec" id="enchilada-casserole"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Enchilada Casserole</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c14.jpg" aria-label="Enlarge: Original Enchilada Casserole card"><img src="img/c14.jpg" alt="Original Enchilada Casserole card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1 lb. ground beef</li>
+<li>1 onion</li>
+<li>1 clove garlic</li>
+<li>Oil, for browning</li>
+<li>1 can tomato soup</li>
+<li>1 can tomato sauce</li>
+<li>1 can enchilada sauce</li>
+<li>12 tortillas</li>
+<li>Cheese, for the top</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Brown the beef, onion and garlic in oil. Add the tomato soup, tomato sauce and enchilada sauce.</li>
+<li>Line a 9×12 baking dish with 6 tortillas. Cover with half the meat mixture.</li>
+<li>Layer the remaining tortillas on top, then the rest of the meat mixture. Sprinkle with cheese.</li>
+<li>Bake at 300° for 20–25 minutes. Let it set 5–10 minutes before serving.</li>
+</ol></div></div></article><article class="rec" id="stuffed-cabbage"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Stuffed Cabbage</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c15.jpg" aria-label="Enlarge: Original Stuffed Cabbage note"><img src="img/c15.jpg" alt="Original Stuffed Cabbage note" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>Ground round</li>
+<li>⅓ c. rice</li>
+<li>⅓ c. parsley</li>
+<li>Salt and pepper</li>
+<li>1 small head cabbage</li>
+<li>2 tbs. olive oil</li>
+<li>½ c. chopped onion</li>
+<li>2 cans diced tomatoes</li>
+<li>1 can tomato sauce</li>
+<li>¼ tsp. oregano</li>
+<li>1 tsp. thyme</li>
+<li>1 tsp. basil</li>
+</ul>
+<p><strong>Directions</strong></p>
+<p><em>The note gives only "cover and cook 45 minutes." A likely method: mix the beef, rice, parsley, salt and pepper. Roll in softened cabbage leaves. Brown the onion in the oil, add the tomatoes, sauce and herbs, and lay the rolls in the sauce. Cover and cook 45 minutes.</em></p></div></div></article><article class="rec" id="tamale-pie"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Tamale Pie</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c16.jpg" aria-label="Enlarge: Original Tamale Pie card"><img src="img/c16.jpg" alt="Original Tamale Pie card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1 lb. ground beef</li>
+<li>1 pkg. taco seasoning mix</li>
+<li>½ c. water</li>
+<li>1 can chili</li>
+<li>⅓ c. sliced olives (optional)</li>
+<li>½ c. imitation sour cream</li>
+<li>1 pkg. extra-light Pillsbury biscuits</li>
+<li>2 c. corn chips, crushed</li>
+<li>1 c. grated cheese</li>
+<li>Shredded lettuce, for the top</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Brown the beef. Add the taco mix and water and simmer 3 minutes.</li>
+<li>Add the chili, olives and sour cream.</li>
+<li>Pat the biscuits into a 2-quart baking dish. Sprinkle with 1 c. corn chips.</li>
+<li>Add the meat mixture. Sprinkle with the cheese and the other 1 c. corn chips.</li>
+<li>Bake at 350–375° for 20–25 minutes. Top with shredded lettuce.</li>
+</ol></div></div></article><article class="rec" id="clam-chowder-with-red-wine-vinegar"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Clam Chowder (with red wine vinegar)</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c17.jpg" aria-label="Enlarge: Original Clam Chowder card, front"><img src="img/c17.jpg" alt="Original Clam Chowder card, front" loading="lazy"></button><button class="ph" data-full="img/c18.jpg" aria-label="Enlarge: Original Clam Chowder card, back"><img src="img/c18.jpg" alt="Original Clam Chowder card, back" loading="lazy"></button></div><div class="txt"><p><em>Serves 8. A note on the card says "double recipe."</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>1 c. onions</li>
+<li>1 c. celery</li>
+<li>2 c. diced potatoes</li>
+<li>2 cans minced clams</li>
+<li>¾ c. butter</li>
+<li>¾ c. flour</li>
+<li>1½ tsp. salt</li>
+<li>Pinch of pepper</li>
+<li>1 qt. half and half</li>
+<li>2 T. red wine vinegar</li>
+<li>Sprinkle of cayenne</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cover the vegetables with water and cook. Do not drain.</li>
+<li>Drain the clam juice into the vegetables.</li>
+<li>Melt the butter and add the flour, salt and pepper. Add the half and half and blend thoroughly with a wire whisk.</li>
+<li>Add the undrained vegetables and the vinegar. Add the clams.</li>
+<li>Simmer slowly until it thickens.</li>
+</ol></div></div></article><article class="rec" id="lindas-ham-cheese-casserole"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Linda&#x27;s Ham &amp; Cheese Casserole</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c19.jpg" aria-label="Enlarge: Original Ham &amp; Cheese Casserole recipe, front"><img src="img/c19.jpg" alt="Original Ham &amp; Cheese Casserole recipe, front" loading="lazy"></button><button class="ph" data-full="img/c20.jpg" aria-label="Enlarge: Original Ham &amp; Cheese Casserole recipe, back"><img src="img/c20.jpg" alt="Original Ham &amp; Cheese Casserole recipe, back" loading="lazy"></button></div><div class="txt"><p><em>Make it the night before.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>16 slices bread, crusts cut off</li>
+<li>Butter</li>
+<li>About ¾ lb. mild cheddar and diced ham, total</li>
+<li>Seasoned salt or other seasonings</li>
+<li>Mayonnaise</li>
+<li>8 eggs</li>
+<li>¾ qt. milk</li>
+</ul>
+<p><strong>Gravy</strong></p>
+<ul>
+<li>Cream of mushroom soup, Franco-American brown gravy and 1 small can mushrooms, or any gravy you like</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Butter the bottom of a 9×15 pan. Layer 8 slices of bread in the pan.</li>
+<li>Butter the top of the bread. Sprinkle with the grated cheese and diced ham, then the seasonings.</li>
+<li>Put another layer of 8 slices of bread over the ham and cheese. Butter the top and spread lightly with mayonnaise.</li>
+<li>Beat the eggs and milk in a blender for ½ minute. Pour over the bread.</li>
+<li>Cover with foil and refrigerate overnight.</li>
+<li>Bake uncovered the next day at 300° for 1 hour 15 minutes. Serve with the gravy.</li>
+</ol></div></div></article></section><section class="sec" id="salads-sides-appetizers"><div class="sechd"><h2>Salads, Sides &amp; Appetizers</h2><span>10 recipes</span></div><article class="rec" id="bowtie-pasta-chicken-salad"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Bowtie Pasta Chicken Salad</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c21.jpg" aria-label="Enlarge: Original Bowtie Pasta Chicken Salad card"><img src="img/c21.jpg" alt="Original Bowtie Pasta Chicken Salad card" loading="lazy"></button></div><div class="txt"><p><em>The card has no title, so I named it.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>1 pkg. bowtie pasta</li>
+<li>1 bottle coleslaw dressing</li>
+<li>1 c. mayonnaise</li>
+<li>1 c. pineapple tidbits</li>
+<li>2 c. chopped celery</li>
+<li>1 can sliced water chestnuts</li>
+<li>2 c. red grapes, cut in half</li>
+<li>2 chicken breasts, diced</li>
+<li>Just before serving: 1 c. cashews (halves) and ¾ bag craisins</li>
+</ul>
+<p><strong>Directions</strong></p>
+<p><em>The card lists ingredients only. A likely method: cook and cool the pasta, stir the coleslaw dressing and mayonnaise together, toss with everything except the cashews and craisins, and chill. Add those just before serving.</em></p></div></div></article><article class="rec" id="chicken-salad"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Chicken Salad</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c22.jpg" aria-label="Enlarge: Original Chicken Salad card"><img src="img/c22.jpg" alt="Original Chicken Salad card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>2 chickens, cooked with 1 large chopped onion, bay leaf, salt, pepper and sage (½ tsp.)</li>
+<li>1 large stalk celery, diced</li>
+<li>1 c. water chestnuts, sliced</li>
+<li>Slivered almonds</li>
+<li>3 green onions, sliced</li>
+<li>6 hard-cooked eggs, chopped</li>
+<li>2 c. pineapple chunks (20 oz. can)</li>
+<li>2 c. mayo</li>
+</ul>
+<p><strong>Directions</strong></p>
+<p><em>The card lists ingredients only: cook the chickens with the onion and seasonings, then cool, debone and chop the meat. Mix with the remaining ingredients.</em></p></div></div></article><article class="rec" id="fiesta-appetizer-pie"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Fiesta Appetizer Pie</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c23.jpg" aria-label="Enlarge: Original Fiesta Appetizer Pie card, front"><img src="img/c23.jpg" alt="Original Fiesta Appetizer Pie card, front" loading="lazy"></button><button class="ph" data-full="img/c24.jpg" aria-label="Enlarge: Original Fiesta Appetizer Pie card, back"><img src="img/c24.jpg" alt="Original Fiesta Appetizer Pie card, back" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>3 ripe avocados</li>
+<li>1 tbs. lemon juice</li>
+<li>Scraped onion, to taste</li>
+<li>1 (8 oz.) carton dairy sour cream</li>
+<li>2 green onions, finely chopped</li>
+<li>1 (8 oz.) jar taco sauce (mild)</li>
+<li>1 c. (4 oz.) Monterey Jack cheese, finely shredded</li>
+<li>Tortilla chips, for serving</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Mash the avocados with the lemon juice and add the scraped onion.</li>
+<li>Spread the avocado mix in a 9-inch pie plate.</li>
+<li>Spread the sour cream on top of the avocado mix and sprinkle with the green onions.</li>
+<li>Spoon the taco sauce over the sour cream.</li>
+<li>Sprinkle the cheese on top. Cover and refrigerate until serving time. Serve with tortilla chips.</li>
+</ol></div></div></article><article class="rec" id="mandarin-pineapple-chicken-salad"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Mandarin-Pineapple Chicken Salad</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c25.jpg" aria-label="Enlarge: Original Mandarin-Pineapple Chicken Salad card"><img src="img/c25.jpg" alt="Original Mandarin-Pineapple Chicken Salad card" loading="lazy"></button></div><div class="txt"><p><em>Makes 8 servings.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>3 c. diced or cubed chicken</li>
+<li>2 tbs. chopped green onion</li>
+<li>1 c. thin-sliced celery</li>
+<li>1 tsp. salt</li>
+<li>2 tbs. lemon juice</li>
+<li>1 c. drained pineapple chunks</li>
+<li>1 c. toasted slivered almonds</li>
+<li>½ c. mayonnaise</li>
+<li>1 tsp. grated lemon rind</li>
+<li>Hard-boiled eggs (noted at the top of the card)</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Combine the chicken, green onion, celery, salt and lemon juice. Chill several hours.</li>
+<li>Add the pineapple and almonds.</li>
+<li>Combine the mayonnaise and lemon rind, fold into the salad and toss lightly.</li>
+</ol>
+<p><em>The card lists no mandarin oranges, even though they're in the title. You may want to add a can, drained, with the pineapple.</em></p></div></div></article><article class="rec" id="cheese-balls"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Cheese Balls</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c26.jpg" aria-label="Enlarge: Original Cheese Balls recipe"><img src="img/c26.jpg" alt="Original Cheese Balls recipe" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>2 (8 oz.) pkgs. cream cheese</li>
+<li>1 jar Kraft Old English cheese spread</li>
+<li>½ c. mild cheddar</li>
+<li>1 tsp. lemon juice</li>
+<li>2 shakes each onion salt and garlic powder</li>
+<li>½ tsp. dry chives</li>
+<li>1 tsp. parsley</li>
+<li>1 c. tiny shrimp</li>
+<li>1 tbs. Miracle Whip</li>
+<li>Chopped walnuts or Ritz cracker crumbs, for rolling</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Stir everything together and refrigerate until firm.</li>
+<li>Mold into balls and roll in walnuts or Ritz crumbs.</li>
+</ol></div></div></article><article class="rec" id="sausage-appetizers"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Sausage Appetizers</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c27.jpg" aria-label="Enlarge: Original Sausage Appetizers card, front"><img src="img/c27.jpg" alt="Original Sausage Appetizers card, front" loading="lazy"></button><button class="ph" data-full="img/c28.jpg" aria-label="Enlarge: Original Sausage Appetizers card, back"><img src="img/c28.jpg" alt="Original Sausage Appetizers card, back" loading="lazy"></button></div><div class="txt"><p><em>Makes about 4 dozen.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>1 lb. pork sausage</li>
+<li>½ t. sweet basil leaves</li>
+<li>⅓ c. minced water chestnuts</li>
+<li>Paprika</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Combine the first 3 ingredients and mix with your hands until well blended.</li>
+<li>Use a heaping teaspoonful for each meatball. Dip your hands in cold water and shape into smooth balls.</li>
+<li>Put in a small baking dish and sprinkle with paprika. Bake 15 minutes at 375°.</li>
+<li>Drain off all the fat. Shake the dish and sprinkle the meatballs with more paprika.</li>
+<li>Bake 15 minutes longer. Drain, keep warm, and serve with toothpicks.</li>
+</ol></div></div></article><article class="rec" id="au-gratin-potatoes"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Au Gratin Potatoes</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c29.jpg" aria-label="Enlarge: Original Au Gratin Potatoes recipe"><img src="img/c29.jpg" alt="Original Au Gratin Potatoes recipe" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>8 medium potatoes</li>
+<li>2 c. cream of chicken soup</li>
+<li>1 large tub sour cream</li>
+<li>1 c. grated cheese, plus more for the top</li>
+<li>¼ c. chopped onions</li>
+<li>1 square (stick) butter</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cook, peel and dice the potatoes.</li>
+<li>Heat the soup, sour cream, cheese, onions and butter until the cheese melts. Mix with the potatoes.</li>
+<li>Top with more cheese and bake until it bubbles.</li>
+</ol>
+<p><em>The card gives no temperature. 350° for 30–45 minutes is typical.</em></p></div></div></article><article class="rec" id="spinach-pasta-salad"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Spinach Pasta Salad</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c30.jpg" aria-label="Enlarge: Original Spinach Pasta Salad card"><img src="img/c30.jpg" alt="Original Spinach Pasta Salad card" loading="lazy"></button></div><div class="txt"><p><em>The card has no title, so I named it.</em></p>
+<p><strong>Dressing</strong></p>
+<ul>
+<li>½ cup canola oil</li>
+<li>⅓ c. vinegar</li>
+<li>⅓ c. soy sauce</li>
+<li>3 T. sugar</li>
+<li>1 tsp. pepper</li>
+</ul>
+<p><strong>Salad</strong></p>
+<ul>
+<li>Pasta, cooked and cooled</li>
+<li>Cashews</li>
+<li>Sunflower seeds</li>
+<li>Chicken</li>
+<li>Torn fresh spinach</li>
+<li>Parmesan cheese</li>
+</ul>
+<p><strong>Directions</strong></p>
+<p><em>The card gives no amounts or steps for the salad. Whisk the dressing together and toss with the salad ingredients.</em></p></div></div></article><article class="rec" id="broccoli-rice-casserole"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Broccoli Rice Casserole</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c31.jpg" aria-label="Enlarge: Original Broccoli Rice Casserole card"><img src="img/c31.jpg" alt="Original Broccoli Rice Casserole card" loading="lazy"></button></div><div class="txt"><p><em>The card has no title, so I named it.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>1 box frozen chopped broccoli</li>
+<li>8 oz. bar Velveeta cheese</li>
+<li>1 box Chicken Rice-A-Roni</li>
+<li>3 T. butter</li>
+<li>1 c. chopped celery</li>
+<li>½ onion</li>
+<li>1 can cream of mushroom soup</li>
+<li>1 can mushrooms</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Prepare the Rice-A-Roni as directed.</li>
+<li>Sauté the celery and onion in a frying pan. Add the broccoli.</li>
+<li>Add the other ingredients to the Rice-A-Roni and mix.</li>
+<li>Bake about 20–30 minutes at 350°.</li>
+</ol></div></div></article><article class="rec" id="torn-clipping-partly-readable"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Torn Clipping (partly readable)</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c32.jpg" aria-label="Enlarge: Torn clipping, side 1"><img src="img/c32.jpg" alt="Torn clipping, side 1" loading="lazy"></button><button class="ph" data-full="img/c33.jpg" aria-label="Enlarge: Torn clipping, side 2"><img src="img/c33.jpg" alt="Torn clipping, side 2" loading="lazy"></button></div><div class="txt"><p><em>This torn page has faded pencil recipes on both sides. I could only read parts of them, so I haven't typed them up as full recipes. The original may read better in person.</em></p>
+<ul>
+<li><strong>Pineapple Cucumber (salad):</strong> 1 pkg. lime Jell-O dissolved in boiling water, 2 tbs. lemon, ¼ tsp. salt, 1 c. diced cucumber, 1 c. mayonnaise, 1 c. whipped topping, add pineapple. Amounts and steps are partly unreadable.</li>
+<li><strong>Applesauce Cake:</strong> only the title and "unsweetened applesauce" are readable.</li>
+<li><strong>Ham (or pork and beans) Casserole:</strong> 1 can pork and beans, 2 tsp. dry mustard, ½ tsp. thyme, 2 tbs. brown sugar, 1 tbs. vinegar, 1 small can tomato sauce, 30 minutes. The rest is unreadable.</li>
+<li><strong>Pumpkin (pie or bread):</strong> only the title and a few amounts are readable.</li>
+</ul></div></div></article></section><section class="sec" id="desserts-treats"><div class="sechd"><h2>Desserts &amp; Treats</h2><span>37 recipes</span></div><article class="rec" id="caramel-popcorn"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Caramel Popcorn</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c34.jpg" aria-label="Enlarge: Original Caramel Popcorn card"><img src="img/c34.jpg" alt="Original Caramel Popcorn card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>¼ or ½ c. margarine</li>
+<li>1 can Eagle Brand milk</li>
+<li>1 cup light Karo syrup</li>
+<li>Pinch of salt (¼ tsp.)</li>
+<li>2¼ c. brown sugar (1 pkg.)</li>
+<li>8 qts. (30 cups) popped popcorn</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Bring the Karo syrup, salt and brown sugar to a boil. Add the milk and margarine.</li>
+<li>Bring to the soft-ball stage, 238°.</li>
+<li>Pour over the popcorn and stir to coat. Makes about 30 balls.</li>
+</ol>
+<p><em>Can also be used for candied apples.</em></p></div></div></article><article class="rec" id="coconut-macaroons"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Coconut Macaroons</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c35.jpg" aria-label="Enlarge: Original Coconut Macaroons card"><img src="img/c35.jpg" alt="Original Coconut Macaroons card" loading="lazy"></button></div><div class="txt"><p><em>The card has no title, so I named it. Makes about 35.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>12 oz. coconut</li>
+<li>3 egg whites</li>
+<li>1 c. sugar (changed from ¾ c.)</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Put the egg whites and sugar in a heavy pan on top of the range. Stir until foamy, 2 or 3 minutes, then stir in the coconut.</li>
+<li>Drop onto a well-greased and floured cookie sheet.</li>
+<li>Bake at 325° for 15 minutes, until the edges and tops are brown.</li>
+<li>Wait 1 minute, then take them off and set them on a rack.</li>
+</ol></div></div></article><article class="rec" id="german-chocolate-cookies"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>German Chocolate Cookies</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c36.jpg" aria-label="Enlarge: Original German Chocolate Cookies card"><img src="img/c36.jpg" alt="Original German Chocolate Cookies card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1 box Pillsbury German chocolate cake mix</li>
+<li>14 oz. caramels (about 50)</li>
+<li>⅔ c. evaporated milk, divided</li>
+<li>¾ c. melted margarine</li>
+<li>1 c. nuts</li>
+<li>1 c. chocolate chips</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Melt the caramels with ⅓ c. evaporated milk in a double boiler.</li>
+<li>Combine the cake mix, melted margarine, the other ⅓ c. evaporated milk and the nuts.</li>
+<li>Spread half the dough in a 9×13 pan. Bake 6 minutes at 350°.</li>
+<li>Sprinkle with the chocolate chips, then spread the caramel over them. Top with the rest of the dough.</li>
+<li>Bake at 350° for 15–20 minutes.</li>
+</ol></div></div></article><article class="rec" id="honey-crunch"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Honey Crunch</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c37.jpg" aria-label="Enlarge: Original Honey Crunch card"><img src="img/c37.jpg" alt="Original Honey Crunch card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>3 cups corn flakes</li>
+<li>1 cup coconut</li>
+<li>1 cup slivered almonds</li>
+<li>¼ cup brown sugar</li>
+<li>⅓ cup honey</li>
+<li>Margarine, for the pan</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Bring the brown sugar and honey to a boil over medium heat.</li>
+<li>Stir in the corn flakes, coconut and nuts.</li>
+<li>Brush a 15-inch cookie pan with margarine and spread the mixture on the pan.</li>
+<li>Bake at 325° for about 8 minutes, stirring quite often.</li>
+<li>Cool 5 minutes, loosen, and let stand until firm. Store in an airtight container.</li>
+</ol></div></div></article><article class="rec" id="carrot-cake"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Carrot Cake</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c38.jpg" aria-label="Enlarge: Original Carrot Cake card, front"><img src="img/c38.jpg" alt="Original Carrot Cake card, front" loading="lazy"></button><button class="ph" data-full="img/c39.jpg" aria-label="Enlarge: Original Carrot Cake card, back"><img src="img/c39.jpg" alt="Original Carrot Cake card, back" loading="lazy"></button></div><div class="txt"><p><em>From Norma Pringle, in Marge Bogden's recipe file</em></p>
+<p><strong>Cake</strong></p>
+<ul>
+<li>2 c. flour</li>
+<li>2 c. sugar</li>
+<li>1¼ c. Wesson oil</li>
+<li>4 eggs</li>
+<li>2 tsp. soda</li>
+<li>2 tsp. salt</li>
+<li>2 tsp. cinnamon</li>
+<li>3 c. grated carrots</li>
+<li>1 c. nuts</li>
+</ul>
+<p><strong>Frosting</strong></p>
+<ul>
+<li>½ stick margarine</li>
+<li>8 oz. cream cheese</li>
+<li>Powdered sugar, as needed</li>
+<li>2 tsp. vanilla</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Mix the cake ingredients and pour into a large Pyrex dish.</li>
+<li>Bake at 300° for 1 hour.</li>
+<li>Cool, then frost.</li>
+</ol></div></div></article><article class="rec" id="cheesecake-lemon-jell-o"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Cheesecake (Lemon Jell-O)</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c40.jpg" aria-label="Enlarge: Original Cheesecake card, front"><img src="img/c40.jpg" alt="Original Cheesecake card, front" loading="lazy"></button><button class="ph" data-full="img/c41.jpg" aria-label="Enlarge: Original Cheesecake card, back"><img src="img/c41.jpg" alt="Original Cheesecake card, back" loading="lazy"></button></div><div class="txt"><p><em>Serves 12.</em></p>
+<p><strong>Crust</strong></p>
+<ul>
+<li>38 graham crackers, crushed</li>
+<li>1 square (stick) butter, melted</li>
+<li>2 tbs. powdered sugar</li>
+</ul>
+<p><strong>Filling</strong></p>
+<ul>
+<li>1 can evaporated milk, chilled</li>
+<li>1 pkg. lemon Jell-O</li>
+<li>1 cup hot water</li>
+<li>1 c. sugar</li>
+<li>1 large pkg. cream cheese</li>
+<li>½ tbs. vanilla</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Mix the crust ingredients well. Spread half in the bottom of a baking dish.</li>
+<li>Chill the can of milk.</li>
+<li>Dissolve the Jell-O in the hot water and let it cool.</li>
+<li>Cream together the sugar, cream cheese and vanilla. Add the Jell-O.</li>
+<li>Whip the chilled milk and fold it into the mixture by hand.</li>
+<li>Pour onto the crust and cover with the rest of the crust mixture.</li>
+<li>Chill 6 to 8 hours.</li>
+</ol></div></div></article><article class="rec" id="chocolate-fudge"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Chocolate Fudge</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c42.jpg" aria-label="Enlarge: Original Chocolate Fudge note"><img src="img/c42.jpg" alt="Original Chocolate Fudge note" loading="lazy"></button></div><div class="txt"><p><em>The note has no title, so I named it.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>3 c. sugar</li>
+<li>⅓ c. cocoa</li>
+<li>Pinch of cream of tartar</li>
+<li>1½ tbs. Karo syrup</li>
+<li>1½ c. cream or milk</li>
+<li>4 tbs. butter</li>
+<li>1 tsp. vanilla</li>
+<li>Nuts</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cook the sugar, cocoa, cream of tartar, Karo and cream to the soft-ball stage.</li>
+<li>Add the butter, vanilla and nuts.</li>
+</ol>
+<p><em>The note gives only those two steps. Classic fudge is cooled before beating in the butter and vanilla, then poured into a buttered pan.</em></p></div></div></article><article class="rec" id="magic-cookie-bars"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Magic Cookie Bars</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c43.jpg" aria-label="Enlarge: Original Magic Cookie Bars page"><img src="img/c43.jpg" alt="Original Magic Cookie Bars page" loading="lazy"></button></div><div class="txt"><p><em>The page has no title, so I named it.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>Margarine</li>
+<li>Graham cracker crumbs</li>
+<li>Chopped nuts</li>
+<li>Chocolate chips</li>
+<li>1⅓ c. coconut</li>
+<li>1 can Eagle Brand milk</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Melt the butter in the bottom of a 9×13 pan.</li>
+<li>Sprinkle the crumbs evenly over the butter. Sprinkle the nuts over them.</li>
+<li>Scatter the chocolate chips over that, then sprinkle the coconut.</li>
+<li>Pour the milk evenly over the coconut.</li>
+<li>Bake at 350° for 25 minutes. Let cool 15 minutes.</li>
+</ol></div></div></article><article class="rec" id="old-fashioned-peach-cobbler"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Old-Fashioned Peach Cobbler</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c44.jpg" aria-label="Enlarge: Original Peach Cobbler recipe"><img src="img/c44.jpg" alt="Original Peach Cobbler recipe" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>2 c. fresh peaches</li>
+<li>1¾ c. sugar (half brown, half white), divided</li>
+<li>1 stick butter or margarine</li>
+<li>1 c. flour</li>
+<li>1 tablespoon baking powder</li>
+<li>1 c. milk</li>
+<li>1 teaspoon vanilla</li>
+<li>1 egg</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Combine the peaches and ¾ c. sugar. Let stand 20 minutes.</li>
+<li>Melt the butter in a 1½-quart baking dish.</li>
+<li>Sift together the flour, 1 c. sugar and baking powder. Add the milk, egg and vanilla and stir briskly. Lumps will remain.</li>
+<li>Pour into the baking dish of melted butter and top with the peaches.</li>
+<li>Bake at 350° for 45 minutes.</li>
+</ol></div></div></article><article class="rec" id="corn-puffs-caramel"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Corn Puffs (Caramel)</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c45.jpg" aria-label="Enlarge: Original Corn Puffs recipe, with Soft Cookie Pops above it"><img src="img/c45.jpg" alt="Original Corn Puffs recipe, with Soft Cookie Pops above it" loading="lazy"></button><button class="ph" data-full="img/c46.jpg" aria-label="Enlarge: A second copy of Corn Puffs, with flight times on it"><img src="img/c46.jpg" alt="A second copy of Corn Puffs, with flight times on it" loading="lazy"></button></div><div class="txt"><p><em>A second copy of this recipe turned up in the sixth video. It gives 232° for the soft-ball stage.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>3 bags corn puffs</li>
+<li>1 lb. margarine</li>
+<li>1 tbs. Karo syrup</li>
+<li>½ c. water</li>
+<li>2 c. sugar</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Mix the margarine, Karo, water and sugar and stir until it boils. Then stop stirring.</li>
+<li>Turn to medium-low and cook about 15 minutes, to the soft-ball stage (233–234°).</li>
+<li>Pour over the corn puffs and stir to coat.</li>
+</ol></div></div></article><article class="rec" id="karens-sugar-cookies"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Karen&#x27;s Sugar Cookies</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c47.jpg" aria-label="Enlarge: Original Sugar Cookies card"><img src="img/c47.jpg" alt="Original Sugar Cookies card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>2 cubes (sticks) margarine</li>
+<li>2 c. sugar</li>
+<li>2 eggs</li>
+<li>4½ c. flour</li>
+<li>½ c. milk</li>
+<li>1 tsp. vanilla</li>
+<li>1 tsp. salt</li>
+<li>4 tsp. baking powder</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cream the margarine, sugar and eggs.</li>
+<li>Add the flour, milk, vanilla, salt and baking powder.</li>
+<li>Bake at 350° for 10 minutes.</li>
+</ol></div></div></article><article class="rec" id="lemon-cake"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Lemon Cake</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c48.jpg" aria-label="Enlarge: Original Lemon Cake recipe"><img src="img/c48.jpg" alt="Original Lemon Cake recipe" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1 pkg. Betty Crocker lemon cake mix</li>
+<li>4 eggs</li>
+<li>¾ c. Wesson oil</li>
+<li>1 pkg. lemon Jell-O</li>
+<li>¾ c. boiling water</li>
+<li>2 tsp. lemon extract or 2 tsp. frozen lemon juice</li>
+<li>Glaze: 2 c. powdered sugar (the rest of the glaze isn't on this side)</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Dissolve the Jell-O in the boiling water and let it cool.</li>
+<li>Add it to the cake mix, eggs and oil. Beat 4 minutes.</li>
+<li>Add the lemon extract or lemon juice.</li>
+<li>Pour into a greased 9×13 pan. Bake at 375° for 30–40 minutes.</li>
+<li>As soon as the cake comes out of the oven, pour the glaze over the top.</li>
+</ol></div></div></article><article class="rec" id="pickett-bars"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Pickett Bars</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c49.jpg" aria-label="Enlarge: Original Pickett Bars card, front"><img src="img/c49.jpg" alt="Original Pickett Bars card, front" loading="lazy"></button><button class="ph" data-full="img/c50.jpg" aria-label="Enlarge: Original Pickett Bars card, back"><img src="img/c50.jpg" alt="Original Pickett Bars card, back" loading="lazy"></button></div><div class="txt"><p><em>From the kitchen of Sharon R. Devenport</em></p>
+<p><strong>Crust</strong></p>
+<ul>
+<li>1 c. margarine</li>
+<li>2 c. brown sugar</li>
+<li>2 eggs</li>
+<li>2 t. vanilla</li>
+<li>2½ c. flour</li>
+<li>1 t. soda</li>
+<li>1 t. salt</li>
+<li>3 cups rolled oats</li>
+</ul>
+<p><strong>Filling</strong></p>
+<ul>
+<li>1 (12 oz.) pkg. chocolate chips</li>
+<li>1 can Eagle Brand milk</li>
+<li>2 T. butter</li>
+<li>½ t. salt</li>
+<li>1 cup chopped nuts</li>
+<li>2 t. vanilla</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cream the margarine and brown sugar. Mix in the eggs and vanilla. Add the flour, soda, salt and oats.</li>
+<li>For the filling, melt the chocolate chips, Eagle Brand, butter and salt over hot water. Add the nuts and vanilla.</li>
+<li>Spread ⅔ of the oat mixture on the bottom of a large cookie sheet. Cover with the chocolate filling.</li>
+<li>Sprinkle the remaining oat mixture over the top.</li>
+<li>Bake at 350° for 25–30 minutes. Cool and cut in squares.</li>
+</ol></div></div></article><article class="rec" id="soft-cookie-pops"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Soft Cookie Pops</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c51.jpg" aria-label="Enlarge: Original Soft Cookie Pops recipe"><img src="img/c51.jpg" alt="Original Soft Cookie Pops recipe" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>¾ cup butter</li>
+<li>2 eggs</li>
+<li>1 tsp. vanilla</li>
+<li>1 cup sugar</li>
+<li>2½ cups flour</li>
+<li>¼ tsp. salt</li>
+<li>1 tsp. baking powder</li>
+<li>Frosting</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cream the butter and sugar. Blend in the eggs and salt.</li>
+<li>Fold in the flour and other dry ingredients and mix well. The dough will be a little sticky.</li>
+<li>Roll out and cut, leaving them ⅓ inch thick.</li>
+<li>Bake about 12 minutes. They won't turn brown, but they'll feel firm to the touch.</li>
+<li>Frost. They stay soft for several days in an airtight container.</li>
+</ol>
+<p><em>The recipe gives no oven temperature. 350° is typical for this kind of cookie.</em></p></div></div></article><article class="rec" id="bonnies-cookies-bars"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Bonnie&#x27;s Cookies (Bars)</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c52.jpg" aria-label="Enlarge: Original Bonnie&#x27;s Cookies card, front"><img src="img/c52.jpg" alt="Original Bonnie&#x27;s Cookies card, front" loading="lazy"></button><button class="ph" data-full="img/c53.jpg" aria-label="Enlarge: Original Bonnie&#x27;s Cookies card, back"><img src="img/c53.jpg" alt="Original Bonnie&#x27;s Cookies card, back" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1 pkg. chocolate cake mix</li>
+<li>⅓ c. butter or margarine, softened</li>
+<li>2 eggs, divided</li>
+<li>1¼ c. condensed milk</li>
+<li>1 tsp. vanilla</li>
+<li>1⅓ c. flaked coconut, divided</li>
+<li>1 c. chopped walnuts</li>
+<li>1 c. chocolate chips</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Mix the cake mix, butter and 1 lightly beaten egg with a fork until crumbly. Press into the bottom of a 13×9 pan.</li>
+<li>Blend the condensed milk, the other egg and the vanilla. Stir in 1 c. coconut, the walnuts and the chocolate chips.</li>
+<li>Pour over the cake mix layer. Sprinkle the remaining ⅓ c. coconut on top.</li>
+<li>Bake at 350° for 28–30 minutes. Cool in the pan.</li>
+</ol></div></div></article><article class="rec" id="brownies-with-marshmallows"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Brownies with Marshmallows</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c54.jpg" aria-label="Enlarge: Original Brownies card"><img src="img/c54.jpg" alt="Original Brownies card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>4 tbs. cocoa</li>
+<li>1¾ c. flour</li>
+<li>1¾ c. sugar</li>
+<li>2 squares (sticks) margarine</li>
+<li>Dash of salt</li>
+<li>4 eggs</li>
+<li>1 c. nuts</li>
+<li>2 c. small marshmallows</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Melt the margarine and cocoa and stir until smooth. Add the flour and salt.</li>
+<li>Cream the eggs and sugar and add. Blend well and add the nuts.</li>
+<li>Bake in a 9×13 pan at 375° for 20–25 minutes.</li>
+<li>Sprinkle with the marshmallows. When they melt, spread with a hot knife.</li>
+<li>Cool and frost.</li>
+</ol></div></div></article><article class="rec" id="cheesecake-brownies"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Cheesecake Brownies</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c55.jpg" aria-label="Enlarge: Original Cheesecake Brownies card, front"><img src="img/c55.jpg" alt="Original Cheesecake Brownies card, front" loading="lazy"></button><button class="ph" data-full="img/c56.jpg" aria-label="Enlarge: Original Cheesecake Brownies card, back"><img src="img/c56.jpg" alt="Original Cheesecake Brownies card, back" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1 batch brownie batter (any recipe)</li>
+<li>8 oz. cream cheese</li>
+<li>5 tbs. butter</li>
+<li>½ c. sugar</li>
+<li>1 egg</li>
+<li>A little flour and vanilla</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Mix the cream cheese, butter, sugar, egg, flour and vanilla together.</li>
+<li>Spread the brownie batter in a pan and spoon the cream cheese mixture over it.</li>
+<li>Bake at 350° for 35–40 minutes.</li>
+</ol>
+<p><em>This card is faded and stained. The amounts of flour and vanilla and the layering steps are my best guess. The back seems to hold a frosting (shortening, sugar and canned milk), but most of it is unreadable.</em></p></div></div></article><article class="rec" id="maple-cake-magazine-clipping"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Maple Cake (magazine clipping)</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c57.jpg" aria-label="Enlarge: Original Maple Cake clipping"><img src="img/c57.jpg" alt="Original Maple Cake clipping" loading="lazy"></button></div><div class="txt"><p><em>From a Relish magazine clipping. The title and the first two steps were cut off.</em></p>
+<p><strong>Cake</strong></p>
+<ul>
+<li>2¾ cups all-purpose flour</li>
+<li>1½ teaspoons baking powder</li>
+<li>1½ teaspoons baking soda</li>
+<li>1 teaspoon salt</li>
+<li>1 teaspoon cinnamon</li>
+<li>½ teaspoon nutmeg</li>
+<li>¾ cup (1½ sticks) unsalted butter, room temperature</li>
+<li>1 cup granulated sugar</li>
+<li>½ cup maple syrup</li>
+<li>3 eggs</li>
+<li>½ teaspoon maple flavoring</li>
+<li>1 cup buttermilk</li>
+<li>¾ cup chopped toasted walnuts (optional)</li>
+</ul>
+<p><strong>Frosting</strong></p>
+<ul>
+<li>1 (8 oz.) package cream cheese, room temperature</li>
+<li>½ cup (1 stick) unsalted butter, room temperature</li>
+<li>3 cups powdered sugar, sifted</li>
+<li>1 teaspoon maple flavoring</li>
+<li>M&amp;M's or other candies, to decorate</li>
+</ul>
+<p><strong>Directions</strong></p>
+<p><em>Steps 1 and 2 are missing. The usual method: cream the butter and sugar, beat in the syrup, eggs and flavoring, then add the dry ingredients alternately with the buttermilk and fold in the nuts.</em></p>
+<ol>
+<li>Divide the batter between two cake pans. Bake 25–30 minutes, until a toothpick comes out clean.</li>
+<li>Cool in the pans 20 minutes, then turn out onto racks and cool completely.</li>
+<li>For the frosting, beat the cream cheese and butter until smooth. Beat in the powdered sugar and maple flavoring.</li>
+<li>Frost and decorate with candies. Serves 16.</li>
+</ol></div></div></article><article class="rec" id="poor-mans-cake"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Poor Man&#x27;s Cake</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c58.jpg" aria-label="Enlarge: Original Poor Man&#x27;s Cake recipe"><img src="img/c58.jpg" alt="Original Poor Man&#x27;s Cake recipe" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1 lb. raisins</li>
+<li>1 c. shortening</li>
+<li>3 c. boiling water</li>
+<li>2 c. brown sugar</li>
+<li>½ c. molasses</li>
+<li>2 tsp. vanilla</li>
+<li>5 c. flour</li>
+<li>½ tsp. soda</li>
+<li>2 T. + 1 tsp. baking powder</li>
+<li>2 tsp. nutmeg</li>
+<li>2 tsp. cinnamon</li>
+<li>¼ tsp. cloves</li>
+<li>Nuts</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cook the raisins and shortening in the boiling water.</li>
+<li>Add the brown sugar and molasses, then let cool.</li>
+<li>Add the vanilla.</li>
+<li>Sift together the flour, soda, baking powder and spices, and add. Stir in nuts.</li>
+<li>Bake at 325°.</li>
+</ol></div></div></article><article class="rec" id="sour-cream-cookies-marilyn-borden"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Sour Cream Cookies (Marilyn Borden)</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c59.jpg" aria-label="Enlarge: Original Sour Cream Cookies note, front"><img src="img/c59.jpg" alt="Original Sour Cream Cookies note, front" loading="lazy"></button><button class="ph" data-full="img/c60.jpg" aria-label="Enlarge: Original Sour Cream Cookies note, back"><img src="img/c60.jpg" alt="Original Sour Cream Cookies note, back" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>2 squares (sticks) butter</li>
+<li>2 eggs</li>
+<li>1¾ c. sugar</li>
+<li>1 c. sour cream</li>
+<li>4 c. flour</li>
+<li>¼ tsp. salt</li>
+<li>1 tsp. baking soda</li>
+<li>½ tsp. almond extract</li>
+<li>1 tsp. vanilla</li>
+</ul>
+<p><strong>Glaze</strong></p>
+<ul>
+<li>Melted butter</li>
+<li>3 tbs. water and a touch of milk</li>
+<li>Powdered sugar</li>
+<li>Vanilla</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cream the butter, eggs and sugar. Add the sour cream.</li>
+<li>Mix the flour, salt and baking soda, and add.</li>
+<li>Add the almond extract and vanilla.</li>
+<li>Chill the dough. Roll ½ to ¼ inch thick on a floured board and cut with a 2-inch cutter.</li>
+<li>Bake at 350° for 10–12 minutes.</li>
+<li>Mix a thin glaze. When the cookies are cool, dip them in the glaze, shake off the extra and set on wax paper.</li>
+</ol></div></div></article><article class="rec" id="sour-cream-cookies-with-half-recipe"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Sour Cream Cookies (with half recipe)</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c61.jpg" aria-label="Enlarge: Original Sour Cream Cookies card, front"><img src="img/c61.jpg" alt="Original Sour Cream Cookies card, front" loading="lazy"></button><button class="ph" data-full="img/c62.jpg" aria-label="Enlarge: Original Sour Cream Cookies card, back"><img src="img/c62.jpg" alt="Original Sour Cream Cookies card, back" loading="lazy"></button></div><div class="txt"><p><em>A second version of the same cookie, with nutmeg. The card also has the amounts for half a batch.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>2 squares (sticks) butter</li>
+<li>2 eggs</li>
+<li>1¾ cups sugar (a note says 2 c. sugar)</li>
+<li>1 cup sour cream</li>
+<li>4 cups flour (a note says 4½–4¾ c.)</li>
+<li>¼ tsp. salt</li>
+<li>1 tsp. baking soda</li>
+<li>½ tsp. almond extract</li>
+<li>1 tsp. vanilla</li>
+<li>1 tsp. nutmeg</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cream the butter and sugar. Add the eggs, almond extract and vanilla.</li>
+<li>Mix the flour, salt and baking soda together.</li>
+<li>Add the flour mixture and sour cream to the butter mixture, alternating.</li>
+<li>Chill the dough so it handles easily. Roll it out quite thick on a floured board and cut out.</li>
+<li>Bake at 350° for 10–12 minutes. Glaze or frost the cookies when they're cool.</li>
+</ol></div></div></article><article class="rec" id="chocolate-crinkles"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Chocolate Crinkles</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c63.jpg" aria-label="Enlarge: Typed recipe sheet with Chocolate Crinkles, Chocolate Marshmallow Cookies, Supreme Lemon Squares, Oatmeal Carmelitas and Rosettes"><img src="img/c63.jpg" alt="Typed recipe sheet with Chocolate Crinkles, Chocolate Marshmallow Cookies, Supreme Lemon Squares, Oatmeal Carmelitas and Rosettes" loading="lazy"></button></div><div class="txt"><p><em>From Joyce Brown, on a typed sheet of recipes. Makes 6 dozen.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>¾ cup vegetable oil</li>
+<li>¾ cup cocoa</li>
+<li>2 cups sugar</li>
+<li>4 eggs</li>
+<li>2 teas. vanilla</li>
+<li>2 cups flour</li>
+<li>2 teas. baking powder</li>
+<li>½ teas. salt</li>
+<li>1 cup powdered sugar</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Mix the first five ingredients well. Sift the next three together and stir in.</li>
+<li>Chill the dough several hours or overnight.</li>
+<li>Heat the oven to 350°. Drop rounded teaspoonfuls of dough into the powdered sugar and roll until coated.</li>
+<li>Place about 2 inches apart on a greased baking sheet. Bake 10 minutes and cool on a rack. Do not overbake!</li>
+</ol></div></div></article><article class="rec" id="chocolate-marshmallow-cookies"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Chocolate Marshmallow Cookies</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c64.jpg" aria-label="Enlarge: Typed sheet, Chocolate Marshmallow Cookies and Rosettes"><img src="img/c64.jpg" alt="Typed sheet, Chocolate Marshmallow Cookies and Rosettes" loading="lazy"></button></div><div class="txt"><p><em>From Marilyn Bogden, on the same typed sheet.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>1 cup shortening</li>
+<li>1⅓ cups brown sugar</li>
+<li>2 eggs</li>
+<li>2 teaspoons vanilla</li>
+<li>½ cup cocoa, scant</li>
+<li>3⅓ cups sifted flour</li>
+<li>3 teaspoons baking powder</li>
+<li>1 teaspoon salt</li>
+<li>1 cup milk</li>
+<li>1 cup chopped nuts (optional)</li>
+<li>36 marshmallows, cut in half</li>
+<li>Chocolate frosting</li>
+<li>Nutmeat halves or chopped nuts, to decorate</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Combine everything except the marshmallows in the order listed. Mix until smooth.</li>
+<li>Drop onto an ungreased cookie sheet. Bake at 350° for 15 minutes.</li>
+<li>During the last minute of baking, take the cookies out and top each with a marshmallow half, cut side down. Bake one more minute.</li>
+<li>Cool and frost with your favorite chocolate frosting. Decorate each with a nut half or chopped nuts.</li>
+</ol></div></div></article><article class="rec" id="double-decker-fudge"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Double Decker Fudge</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c65.jpg" aria-label="Enlarge: Original Double Decker Fudge card, front"><img src="img/c65.jpg" alt="Original Double Decker Fudge card, front" loading="lazy"></button><button class="ph" data-full="img/c66.jpg" aria-label="Enlarge: Original Double Decker Fudge card, back"><img src="img/c66.jpg" alt="Original Double Decker Fudge card, back" loading="lazy"></button></div><div class="txt"><p><em>From the kitchen of Brenda. Makes 4 lbs.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>¼ c. butter, melted</li>
+<li>½ c. Hershey's cocoa</li>
+<li>1 t. vanilla</li>
+<li>2 c. (12 oz.) Reese's peanut butter chips, divided</li>
+<li>4½ c. sugar</li>
+<li>1 jar (7 oz.) marshmallow creme</li>
+<li>1½ c. evaporated milk</li>
+<li>¼ c. butter</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Line a 13×9 pan with foil. Put 1 c. peanut butter chips in a medium bowl and set aside. In a second bowl, blend the melted butter, cocoa and vanilla until smooth, then add the other 1 c. chips.</li>
+<li>In a heavy 4-quart saucepan, combine the sugar, marshmallow creme, evaporated milk and ¼ c. butter. Cook over medium heat, stirring constantly, until it comes to a rolling boil. Boil and stir 5 minutes.</li>
+<li>Remove from the heat. Immediately add half the hot mixture to the bowl of plain peanut butter chips. Pour the rest into the cocoa mixture and stir to blend.</li>
+<li>Beat the peanut butter mixture until the chips are completely melted. Spread evenly in the pan.</li>
+<li>Beat the cocoa mixture until the chips melt and it thickens. Spread evenly over the peanut butter layer.</li>
+<li>Cool, lift out of the pan, remove the foil and cut into squares. Store airtight in a cool, dry place.</li>
+</ol></div></div></article><article class="rec" id="ginger-snaps"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Ginger Snaps</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c67.jpg" aria-label="Enlarge: Original Ginger Snaps recipe"><img src="img/c67.jpg" alt="Original Ginger Snaps recipe" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1½ c. shortening</li>
+<li>2 c. white sugar</li>
+<li>2 tsp. salt</li>
+<li>2 eggs</li>
+<li>5 tbs. + 1 tsp. molasses</li>
+<li>4 c. flour</li>
+<li>4 tsp. soda</li>
+<li>2 tsp. ginger</li>
+<li>2 tsp. cinnamon</li>
+<li>Sugar and cinnamon, for rolling</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Mix everything together and roll into balls.</li>
+<li>Roll the balls in sugar and cinnamon.</li>
+<li>Bake at 350° for 9–12 minutes.</li>
+</ol></div></div></article><article class="rec" id="hello-dollies"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Hello Dollies</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c68.jpg" aria-label="Enlarge: Original Hello Dollies recipe"><img src="img/c68.jpg" alt="Original Hello Dollies recipe" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1 square (stick) margarine, melted</li>
+<li>1 c. crushed graham crackers</li>
+<li>1 c. coconut</li>
+<li>1 c. chocolate chips</li>
+<li>1 c. butterscotch chips</li>
+<li>1 c. chopped nuts</li>
+<li>1 can Eagle Brand milk</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Melt the margarine in a 9×9 pan.</li>
+<li>Layer the graham crackers, coconut, chocolate chips, butterscotch chips and nuts. Pour the Eagle Brand over the top.</li>
+<li>Bake at 350° for 25 minutes. Cool, then cut.</li>
+</ol></div></div></article><article class="rec" id="oatmeal-carmelitas"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Oatmeal Carmelitas</h3><div class="rg"><div class="cards"></div><div class="txt"><p><em>From Sandy Hart, on the typed sheet.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>1½ cup flour</li>
+<li>1 cup + 2 TBS brown sugar</li>
+<li>½ teas. salt</li>
+<li>1½ cup quick oats</li>
+<li>¾ teas. soda</li>
+<li>1 cup + 2 TBS butter, melted</li>
+<li>1 (6 oz.) pkg. chocolate chips</li>
+<li>1 cup chopped pecans</li>
+<li>1 bottle caramel topping</li>
+<li>5 TBS flour</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Combine the first six ingredients. Press a little over half of the crumbs into the bottom of a 9×13 pan. Bake at 350° for 10 minutes.</li>
+<li>Sprinkle with the chocolate chips and pecans.</li>
+<li>Blend the caramel topping with the 5 TBS flour. Pour it back and forth over the chocolate and pecans.</li>
+<li>Sprinkle with the remaining crumb mixture. Bake 15 to 20 minutes until golden brown.</li>
+</ol></div></div></article><article class="rec" id="oatmeal-cookies"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Oatmeal Cookies</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c69.jpg" aria-label="Enlarge: Original Oatmeal Cookies card, front"><img src="img/c69.jpg" alt="Original Oatmeal Cookies card, front" loading="lazy"></button><button class="ph" data-full="img/c70.jpg" aria-label="Enlarge: Original Oatmeal Cookies card, back"><img src="img/c70.jpg" alt="Original Oatmeal Cookies card, back" loading="lazy"></button></div><div class="txt"><p><em>Makes 3–4 dozen.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>2 c. brown sugar</li>
+<li>1 c. shortening</li>
+<li>2 eggs</li>
+<li>½ c. milk</li>
+<li>2 c. quick rolled oats</li>
+<li>½ tsp. salt</li>
+<li>1 tsp. baking soda</li>
+<li>1 tsp. allspice</li>
+<li>1 tsp. cinnamon</li>
+<li>1 tsp. cloves</li>
+<li>1 tsp. nutmeg</li>
+<li>2¼ c. flour</li>
+<li>1 c. raisins</li>
+<li>½ c. nuts</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cream together the sugar and shortening. Add the eggs and milk and mix well. Then add the oats.</li>
+<li>Sift together the dry ingredients and mix in until smooth. Stir in the raisins and nuts.</li>
+<li>Bake at 350–375° for 10 minutes, or until lightly browned.</li>
+</ol></div></div></article><article class="rec" id="rosettes"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Rosettes</h3><div class="rg"><div class="cards"></div><div class="txt"><p><em>From LaRee Larsen, on the typed sheet. Makes 3½ dozen. You'll need a rosette iron.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>2 eggs</li>
+<li>1 TB sugar</li>
+<li>¼ teas. salt</li>
+<li>1 cup flour</li>
+<li>1 cup milk</li>
+<li>1 teas. vanilla</li>
+<li>Crisco oil, for frying</li>
+<li>Powdered sugar</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Beat the eggs, sugar and salt. Add the flour, milk and vanilla and beat.</li>
+<li>Heat 1½ inches of oil in a deep fryer or saucepan.</li>
+<li>Dip the rosette iron in the oil to heat it, then dip it just level in the batter. Deep fry 15 to 20 seconds.</li>
+<li>When all are cool, dip in powdered sugar.</li>
+</ol></div></div></article><article class="rec" id="snickerdoodles"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Snickerdoodles</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c71.jpg" aria-label="Enlarge: Original Snickerdoodles recipe"><img src="img/c71.jpg" alt="Original Snickerdoodles recipe" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1 c. margarine</li>
+<li>1½ c. brown or white sugar</li>
+<li>1 tsp. vanilla</li>
+<li>2 eggs, beaten</li>
+<li>2½ c. flour (1 c. wheat and 1½ c. white)</li>
+<li>1 tsp. cream of tartar</li>
+<li>2 tsp. baking powder</li>
+<li>¼ tsp. salt</li>
+<li>For rolling: ¼ c. brown sugar and 2 tsp. cinnamon</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cream the margarine and sugar. Add the vanilla and eggs.</li>
+<li>Add the flour, cream of tartar, baking powder and salt.</li>
+<li>Chill the dough. Form into balls the size of a large marble and roll in the sugar and cinnamon mix.</li>
+<li>Place on a greased cookie sheet 2 inches apart. Bake at 400° for 8–10 minutes.</li>
+</ol></div></div></article><article class="rec" id="supreme-lemon-squares"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Supreme Lemon Squares</h3><div class="rg"><div class="cards"></div><div class="txt"><p><em>From Sandy Hart, on the typed sheet. They freeze well.</em></p>
+<p><strong>Crust</strong></p>
+<ul>
+<li>¾ cup butter, melted</li>
+<li>1½ cup flour</li>
+<li>6 TBS powdered sugar</li>
+</ul>
+<p><strong>Filling</strong></p>
+<ul>
+<li>3 TBS lemon juice</li>
+<li>Some grated lemon rind</li>
+<li>3 beaten eggs</li>
+<li>1½ cup sugar</li>
+<li>3 TBS flour</li>
+<li>½ teas. baking powder</li>
+</ul>
+<p><strong>Icing</strong></p>
+<ul>
+<li>1½ cup powdered sugar</li>
+<li>1 teas. vanilla</li>
+<li>1½ TBS melted butter</li>
+<li>2 teas. milk</li>
+<li>1½ TBS lemon juice</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Mix the crust ingredients and pat into a 9×13 pan. Bake 15 minutes at 350°.</li>
+<li>Mix the filling ingredients, pour over the crust, and bake 25 minutes at 350°, just until lightly browned.</li>
+<li>Cool, then ice.</li>
+</ol></div></div></article><article class="rec" id="caramel-ribbon-brownies"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Caramel Ribbon Brownies</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c72.jpg" aria-label="Enlarge: Original Caramel Ribbon Brownies card, front"><img src="img/c72.jpg" alt="Original Caramel Ribbon Brownies card, front" loading="lazy"></button><button class="ph" data-full="img/c73.jpg" aria-label="Enlarge: Original Caramel Ribbon Brownies card, back"><img src="img/c73.jpg" alt="Original Caramel Ribbon Brownies card, back" loading="lazy"></button></div><div class="txt"><p><em>Makes 36 bars.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>1 (14 oz.) bag light caramels</li>
+<li>¾ c. evaporated milk, divided</li>
+<li>6 tbs. butter, melted</li>
+<li>1 pkg. chocolate cake mix</li>
+<li>1 c. chopped nuts</li>
+<li>1½ c. chocolate chips</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Combine the caramels and 2 tablespoons of the evaporated milk. Cook over low heat, stirring often, until the caramels melt.</li>
+<li>In a mixing bowl, combine the rest of the milk with the cake mix, nuts and butter. Mix well.</li>
+<li>Spread half the cake mixture in a greased 13×9×2-inch pan. Bake at 350° for 10 minutes.</li>
+<li>Sprinkle the chocolate chips over the hot crust and drizzle the caramel on top.</li>
+<li>Drop the remaining cake mixture by teaspoons over everything. Bake at 350° for 10 minutes.</li>
+<li>Cut into bars while warm. Cool in the pan.</li>
+</ol>
+<p><em>The card reads "4 light caramels." It almost certainly means a 14 oz. bag.</em></p></div></div></article><article class="rec" id="good-fudge"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Good Fudge</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c74.jpg" aria-label="Enlarge: Original Good Fudge note"><img src="img/c74.jpg" alt="Original Good Fudge note" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>2½ c. sugar (changed from 3 c.)</li>
+<li>1⅓ c. canned (evaporated) milk</li>
+<li>5 tbs. butter</li>
+<li>1½ pkgs. (12 oz. each) semisweet chocolate chips</li>
+<li>3 c. mini marshmallows</li>
+<li>1 tsp. vanilla</li>
+<li>Nuts</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cook the sugar, milk and butter until it comes to a rolling boil. Boil 5 minutes, stirring.</li>
+<li>Take it off the burner. Add the chocolate chips, marshmallows, vanilla and nuts. Stir until melted.</li>
+<li>Pour into a pan and refrigerate about 2 hours.</li>
+</ol></div></div></article><article class="rec" id="ms-fields-cookies"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Ms. Field&#x27;s Cookies</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c75.jpg" aria-label="Enlarge: Original Ms. Field&#x27;s Cookies recipe"><img src="img/c75.jpg" alt="Original Ms. Field&#x27;s Cookies recipe" loading="lazy"></button><button class="ph" data-full="img/c76.jpg" aria-label="Enlarge: Smaller batch on a Cate Equipment Company note"><img src="img/c76.jpg" alt="Smaller batch on a Cate Equipment Company note" loading="lazy"></button></div><div class="txt"><p><em>A Mrs. Fields–style chocolate chip cookie. A second sheet has a smaller batch.</em></p>
+<p><strong>Ingredients</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ingredient</th>
+<th>Full batch</th>
+<th>Smaller batch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sugar</td>
+<td>½ c.</td>
+<td>¼ c.</td>
+</tr>
+<tr>
+<td>Brown sugar</td>
+<td>2 c.</td>
+<td>1 c.</td>
+</tr>
+<tr>
+<td>Butter</td>
+<td>1 lb.</td>
+<td>½ lb.</td>
+</tr>
+<tr>
+<td>Eggs, well beaten</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Vanilla</td>
+<td>2 Tbl.</td>
+<td>1 Tbl.</td>
+</tr>
+<tr>
+<td>Flour</td>
+<td>6 c.</td>
+<td>3 c.</td>
+</tr>
+<tr>
+<td>Soda</td>
+<td>1½ t.</td>
+<td>¾ t.</td>
+</tr>
+<tr>
+<td>Salt</td>
+<td>1½ t.</td>
+<td>¾ t.</td>
+</tr>
+<tr>
+<td>Chocolate chips</td>
+<td>3 large pkgs.</td>
+<td>1½ pkgs.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cream the sugars and butter. Add the eggs and vanilla.</li>
+<li>Sift the flour, soda and salt together and add. Stir in the chocolate chips.</li>
+<li>Roll into balls. Bake at 350° for 8 minutes. Take them out while they're still doughy.</li>
+</ol></div></div></article><article class="rec" id="peanut-butter-bars"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Peanut Butter Bars</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c77.jpg" aria-label="Enlarge: Original Peanut Butter Bars card"><img src="img/c77.jpg" alt="Original Peanut Butter Bars card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1 c. sugar</li>
+<li>1 c. brown sugar</li>
+<li>1 c. margarine</li>
+<li>2 eggs</li>
+<li>⅔ c. peanut butter</li>
+<li>1 t. baking soda</li>
+<li>¼ t. salt</li>
+<li>½ t. vanilla</li>
+<li>2 c. flour</li>
+<li>2 c. oatmeal</li>
+<li>Chocolate frosting</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Blend the sugars and margarine. Add the eggs and peanut butter.</li>
+<li>Add the dry ingredients and vanilla.</li>
+<li>Press into a large cookie sheet. Bake at 350° for 22 minutes.</li>
+<li>Frost with chocolate frosting.</li>
+</ol></div></div></article><article class="rec" id="powdered-sugar-cookies"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Powdered Sugar Cookies</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c78.jpg" aria-label="Enlarge: Original Powdered Sugar Cookies note"><img src="img/c78.jpg" alt="Original Powdered Sugar Cookies note" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>2 squares (sticks) butter</li>
+<li>½ c. powdered sugar, plus more for rolling</li>
+<li>1 tsp. vanilla</li>
+<li>2¼ c. flour</li>
+<li>¼ tsp. salt</li>
+<li>¾ c. chopped nuts</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Cream the butter, powdered sugar and vanilla.</li>
+<li>Sift the flour and salt and add. Stir in the nuts.</li>
+<li>Roll into round balls. Bake at 400° for 8–10 minutes only.</li>
+<li>Roll two times in powdered sugar.</li>
+</ol></div></div></article><article class="rec" id="raisin-cookies"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Raisin Cookies</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c79.jpg" aria-label="Enlarge: Original Raisin Cookies card"><img src="img/c79.jpg" alt="Original Raisin Cookies card" loading="lazy"></button></div><div class="txt"><p><strong>Ingredients</strong></p>
+<ul>
+<li>1½ cups raisins</li>
+<li>1½ c. water</li>
+<li>1 c. + 1 tbs. shortening</li>
+<li>2 c. sugar</li>
+<li>4 eggs</li>
+<li>1 tsp. vanilla</li>
+<li>4 c. flour</li>
+<li>1 tsp. salt</li>
+<li>1 tsp. baking powder</li>
+<li>1 tsp. soda</li>
+<li>1½ tsp. cinnamon</li>
+<li>¼ tsp. nutmeg</li>
+<li>¼ tsp. allspice</li>
+<li>1 c. chopped nuts</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Boil the raisins in the water for 10 minutes and let cool.</li>
+<li>Cream the shortening and sugar. Add the eggs one at a time, then the vanilla.</li>
+<li>Add the dry ingredients, the raisins with their water, and the nuts.</li>
+<li>Drop onto a greased cookie sheet. Bake at 375° for 12–15 minutes.</li>
+</ol>
+<p><em>Spritz Cookies and Gingerbread Men: see Holiday.</em></p></div></div></article></section><section class="sec" id="holiday"><div class="sechd"><h2>Holiday</h2><span>2 recipes</span></div><article class="rec" id="spritz-cookies-christmas"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Spritz Cookies (Christmas)</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c80.jpg" aria-label="Enlarge: Original Spritz card"><img src="img/c80.jpg" alt="Original Spritz card" loading="lazy"></button></div><div class="txt"><p><em>From the kitchen of Brenda</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>1 c. butter or margarine</li>
+<li>½ c. sugar</li>
+<li>2¼ c. flour</li>
+<li>½ tsp. salt</li>
+<li>1 egg</li>
+<li>1 tsp. almond extract</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Heat the oven to 400°.</li>
+<li>Cream the butter and sugar. Blend in the remaining ingredients.</li>
+<li>Put the dough in a cookie press and press onto a cookie sheet.</li>
+<li>Bake 6–9 minutes, until lightly browned.</li>
+</ol>
+<p><em>Also listed under Desserts &amp; Treats.</em></p></div></div></article><article class="rec" id="gingerbread-men-christmas"><span class="sw1" aria-hidden="true"></span><span class="sw2" aria-hidden="true"></span><h3>Gingerbread Men (Christmas)</h3><div class="rg"><div class="cards"><button class="ph" data-full="img/c81.jpg" aria-label="Enlarge: Original Gingerbread Man card, front"><img src="img/c81.jpg" alt="Original Gingerbread Man card, front" loading="lazy"></button><button class="ph" data-full="img/c82.jpg" aria-label="Enlarge: Original Gingerbread Man card, back"><img src="img/c82.jpg" alt="Original Gingerbread Man card, back" loading="lazy"></button><button class="ph" data-full="img/c83.jpg" aria-label="Enlarge: A second handwritten copy of Gingerbread Men"><img src="img/c83.jpg" alt="A second handwritten copy of Gingerbread Men" loading="lazy"></button></div><div class="txt"><p><em>A second handwritten copy of this recipe turned up in the fifth video. It has the same ingredients and steps.</em></p>
+<p><strong>Ingredients</strong></p>
+<ul>
+<li>1 cup molasses</li>
+<li>1 cup shortening</li>
+<li>1 cup sugar</li>
+<li>1 egg</li>
+<li>1 tsp. vanilla</li>
+<li>2 tsp. soda</li>
+<li>½ cup hot water</li>
+<li>6 cups flour</li>
+<li>¼ tsp. cloves</li>
+<li>1 tsp. cinnamon</li>
+<li>1 tsp. salt</li>
+<li>½ tsp. ginger</li>
+</ul>
+<p><strong>Directions</strong></p>
+<ol>
+<li>Simmer the molasses and shortening for 15 minutes.</li>
+<li>Cream together the sugar, egg and vanilla.</li>
+<li>Dissolve the soda in the hot water and add it to the sugar mixture.</li>
+<li>Sift together the flour, cloves, cinnamon, salt and ginger. Add to the other mixtures and stir until the flour is mixed in well.</li>
+<li>Roll thin and cut with a cookie cutter.</li>
+<li>Bake 10 minutes at 375°.</li>
+</ol>
+<p><em>The card doesn't say when the molasses mixture goes in. It most likely gets stirred in with the sugar mixture before the flour.</em></p></div></div></article></section></main>
+<footer>Typed from the original cards. Notes in <em>italics</em> are additions, not the card's own words. Tap any card photo to see it full size.</footer>
+</div>
+<dialog id="dlg"><img id="dimg" alt=""><p id="dcap"></p></dialog>
+<script>
+{
+const toc=document.getElementById('toc'),tab=document.getElementById('tab'),scrim=document.getElementById('scrim'),q=document.getElementById('q'),list=document.getElementById('list');
+const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+let timer,cur;
+const setOpen=o=>{if(o&&cur&&!toc.classList.contains('open')){setG(cur.closest('.grp'),true);list.scrollTop=cur.offsetTop-list.clientHeight/2}toc.classList.toggle('open',o);scrim.classList.toggle('on',o&&!fine);tab.setAttribute('aria-expanded',o)};
+tab.addEventListener('click',()=>{const o=fine||!toc.classList.contains('open');setOpen(o);if(o&&fine)q.focus({preventScroll:true})});
+document.getElementById('close').addEventListener('click',()=>{setOpen(false);tab.focus()});
+scrim.addEventListener('click',()=>setOpen(false));
+if(fine){toc.addEventListener('mouseenter',()=>{clearTimeout(timer);setOpen(true)});
+ toc.addEventListener('mouseleave',()=>{if(toc.contains(document.activeElement)&&document.activeElement===q&&q.value)return;timer=setTimeout(()=>setOpen(false),350)})}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toc.classList.contains('open')){setOpen(false);tab.focus()}});
+list.addEventListener('click',e=>{if(e.target.closest('a')&&!fine)setOpen(false)});
+q.addEventListener('input',()=>{const v=q.value.trim().toLowerCase();let any=0;
+ for(const g of list.querySelectorAll('.grp')){let n=0;for(const a of g.querySelectorAll('li a')){const m=!v||a.dataset.t.includes(v);a.parentElement.hidden=!m;if(m)n++}g.hidden=!n;if(v)setG(g,n>0);any+=n}
+ if(!v){grps.forEach(g=>setG(g,false));if(cur)setG(cur.closest('.grp'),true)}
+ document.getElementById('empty').style.display=any?'none':'block'});
+q.addEventListener('keydown',e=>{if(e.key==='Enter'){const a=list.querySelector('li:not([hidden]) a');if(a){location.hash=a.getAttribute('href');setOpen(false)}}});
+const setG=(g,o)=>{g.querySelector('ul').hidden=!o;g.querySelector('.tg').setAttribute('aria-expanded',o)};
+const grps=[...list.querySelectorAll('.grp')];
+list.addEventListener('click',e=>{const b=e.target.closest('.tg');if(b){const g=b.closest('.grp');setG(g,g.querySelector('ul').hidden)}});
+document.getElementById('ex').addEventListener('click',()=>grps.forEach(g=>setG(g,true)));
+document.getElementById('co').addEventListener('click',()=>grps.forEach(g=>setG(g,false)));
+const links=new Map([...list.querySelectorAll('li a')].map(a=>[a.getAttribute('href').slice(1),a]));
+const io=new IntersectionObserver(es=>{for(const e of es){if(e.isIntersecting){const a=links.get(e.target.id);if(a&&a!==cur){cur&&cur.classList.remove('on');a.classList.add('on');cur=a}}}},{rootMargin:'-20% 0px -70% 0px'});
+document.querySelectorAll('.rec').forEach(r=>io.observe(r));
+const dlg=document.getElementById('dlg'),dimg=document.getElementById('dimg'),dcap=document.getElementById('dcap');
+document.addEventListener('click',e=>{const b=e.target.closest('.ph');if(!b)return;const i=b.querySelector('img');dimg.src=b.dataset.full;dimg.alt=i.alt;dcap.textContent=i.alt+' · tap to close';try{dlg.showModal()}catch(_){}});
+dlg.addEventListener('click',()=>dlg.close());
+}
+</script>
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}</script>
+</body>
+</html>

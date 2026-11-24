@@ -1,0 +1,12 @@
+const CACHE='recipes-11101a21bd';
+const FILES=["./", "index.html", "manifest.json", "img/c00.jpg", "img/c01.jpg", "img/c02.jpg", "img/c03.jpg", "img/c04.jpg", "img/c05.jpg", "img/c06.jpg", "img/c07.jpg", "img/c08.jpg", "img/c09.jpg", "img/c10.jpg", "img/c11.jpg", "img/c12.jpg", "img/c13.jpg", "img/c14.jpg", "img/c15.jpg", "img/c16.jpg", "img/c17.jpg", "img/c18.jpg", "img/c19.jpg", "img/c20.jpg", "img/c21.jpg", "img/c22.jpg", "img/c23.jpg", "img/c24.jpg", "img/c25.jpg", "img/c26.jpg", "img/c27.jpg", "img/c28.jpg", "img/c29.jpg", "img/c30.jpg", "img/c31.jpg", "img/c32.jpg", "img/c33.jpg", "img/c34.jpg", "img/c35.jpg", "img/c36.jpg", "img/c37.jpg", "img/c38.jpg", "img/c39.jpg", "img/c40.jpg", "img/c41.jpg", "img/c42.jpg", "img/c43.jpg", "img/c44.jpg", "img/c45.jpg", "img/c46.jpg", "img/c47.jpg", "img/c48.jpg", "img/c49.jpg", "img/c50.jpg", "img/c51.jpg", "img/c52.jpg", "img/c53.jpg", "img/c54.jpg", "img/c55.jpg", "img/c56.jpg", "img/c57.jpg", "img/c58.jpg", "img/c59.jpg", "img/c60.jpg", "img/c61.jpg", "img/c62.jpg", "img/c63.jpg", "img/c64.jpg", "img/c65.jpg", "img/c66.jpg", "img/c67.jpg", "img/c68.jpg", "img/c69.jpg", "img/c70.jpg", "img/c71.jpg", "img/c72.jpg", "img/c73.jpg", "img/c74.jpg", "img/c75.jpg", "img/c76.jpg", "img/c77.jpg", "img/c78.jpg", "img/c79.jpg", "img/c80.jpg", "img/c81.jpg", "img/c82.jpg", "img/c83.jpg", "fonts/atkinson-hyperlegible-latin-400-normal.woff2", "fonts/atkinson-hyperlegible-latin-700-normal.woff2", "fonts/caveat-latin-600-normal.woff2", "fonts/fraunces-latin-600-normal.woff2", "fonts/fraunces-latin-700-normal.woff2", "icons/apple-touch-icon.png", "icons/icon-192.png", "icons/icon-512.png"];
+self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+self.addEventListener('fetch',e=>{
+  const r=e.request; if(r.method!=='GET')return;
+  if(r.mode==='navigate'){
+    e.respondWith(fetch(r).then(res=>{const cp=res.clone();caches.open(CACHE).then(c=>c.put('index.html',cp));return res}).catch(()=>caches.match('index.html',{ignoreSearch:true})));
+    return;
+  }
+  e.respondWith(caches.match(r,{ignoreSearch:true}).then(hit=>hit||fetch(r).then(res=>{if(res.ok&&new URL(r.url).origin===location.origin){const cp=res.clone();caches.open(CACHE).then(c=>c.put(r,cp))}return res})));
+});
